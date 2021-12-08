@@ -18,6 +18,12 @@ namespace RfCommClient
                 OnArrayReceived(this, Data);
         }
 
+        private void FDecoder_OnStringReceived(Object Sender, String Data)
+        {
+            if (OnStringReceived != null)
+                OnStringReceived(this, Data);
+        }
+
         private void FDecoder_OnInt64Received(Object Sender, Int64 Data)
         {
             if (OnInt64Received != null)
@@ -92,6 +98,7 @@ namespace RfCommClient
             FDecoder.OnInt32Received += FDecoder_OnInt32Received;
             FDecoder.OnInt64Received += FDecoder_OnInt64Received;
             FDecoder.OnArrayReceived += FDecoder_OnArrayReceived;
+            FDecoder.OnStringReceived += FDecoder_OnStringReceived;
 
             FDecoder.OnError += FDecoder_OnError;
 
@@ -104,6 +111,7 @@ namespace RfCommClient
             OnInt32Received = null;
             OnInt64Received = null;
             OnArrayReceived = null;
+            OnStringReceived = null;
 
             OnError = null;
         }
@@ -156,7 +164,15 @@ namespace RfCommClient
         #region Array
         public Int32 WriteData(Byte[] Data)
         {
-            if (Data == null || Data.Length == 0 || Data.Length > UInt16.MaxValue - 3)
+            if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
+                return wclErrors.WCL_E_INVALID_ARGUMENT;
+
+            return Write(CommandBuilder.Create(Data));
+        }
+
+        public Int32 WriteData(String Data)
+        {
+            if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
                 return wclErrors.WCL_E_INVALID_ARGUMENT;
 
             return Write(CommandBuilder.Create(Data));
@@ -214,6 +230,11 @@ namespace RfCommClient
         {
             return Write(CommandBuilder.Create(Commands.CMD_GET_ARRAY));
         }
+
+        public Int32 GetString()
+        {
+            return Write(CommandBuilder.Create(Commands.CMD_GET_STRING));
+        }
         #endregion
         #endregion
 
@@ -228,6 +249,7 @@ namespace RfCommClient
         public event Int32Received OnInt32Received;
         public event Int64Received OnInt64Received;
         public event ArrayReceived OnArrayReceived;
+        public event StringReceived OnStringReceived;
         #endregion
 
         #region Error events.

@@ -66,6 +66,12 @@ namespace RfCommServer
                 OnGetByte(this);
         }
 
+        private void FDecoder_OnGetString(Object Sender)
+        {
+            if (OnGetString != null)
+                OnGetString(this);
+        }
+
         private void FDecoder_OnArrayReceived(Object Sender, Byte[] Data)
         {
             if (OnArrayReceived != null)
@@ -119,6 +125,12 @@ namespace RfCommServer
             if (OnByteReceived != null)
                 OnByteReceived(this, Data);
         }
+
+        private void FDecoder_OnStringReceived(Object Sender, String Data)
+        {
+            if (OnStringReceived != null)
+                OnStringReceived(this, Data);
+        }
         #endregion
 
         protected override void ProcessData(Byte[] Data)
@@ -140,6 +152,7 @@ namespace RfCommServer
             FDecoder.OnInt32Received += FDecoder_OnInt32Received;
             FDecoder.OnInt64Received += FDecoder_OnInt64Received;
             FDecoder.OnArrayReceived += FDecoder_OnArrayReceived;
+            FDecoder.OnStringReceived += FDecoder_OnStringReceived;
 
             FDecoder.OnGetByte += FDecoder_OnGetByte;
             FDecoder.OnGetUIn16 += FDecoder_OnGetUIn16;
@@ -150,6 +163,7 @@ namespace RfCommServer
             FDecoder.OnGetInt32 += FDecoder_OnGetInt32;
             FDecoder.OnGetInt64 += FDecoder_OnGetInt64;
             FDecoder.OnGetArray += FDecoder_OnGetArray;
+            FDecoder.OnGetString += FDecoder_OnGetString;
 
             OnByteReceived = null;
             OnUInt16Received = null;
@@ -160,6 +174,7 @@ namespace RfCommServer
             OnInt32Received = null;
             OnInt64Received = null;
             OnArrayReceived = null;
+            OnStringReceived = null;
 
             OnGetByte = null;
             OnGetUIn16 = null;
@@ -170,6 +185,7 @@ namespace RfCommServer
             OnGetInt32 = null;
             OnGetInt64 = null;
             OnGetArray = null;
+            OnGetString = null;
         }
 
         #region Write data
@@ -220,7 +236,15 @@ namespace RfCommServer
         #region Array
         public Int32 WriteData(Byte[] Data)
         {
-            if (Data == null || Data.Length == 0 || Data.Length > UInt16.MaxValue - 3)
+            if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
+                return wclErrors.WCL_E_INVALID_ARGUMENT;
+
+            return Write(CommandBuilder.Create(Data));
+        }
+
+        public Int32 WriteData(String Data)
+        {
+            if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
                 return wclErrors.WCL_E_INVALID_ARGUMENT;
 
             return Write(CommandBuilder.Create(Data));
@@ -246,6 +270,7 @@ namespace RfCommServer
         public event Int32Received OnInt32Received;
         public event Int64Received OnInt64Received;
         public event ArrayReceived OnArrayReceived;
+        public event StringReceived OnStringReceived;
         #endregion
 
         #region Get events.
@@ -258,6 +283,8 @@ namespace RfCommServer
         public event DataEvent OnGetInt32;
         public event DataEvent OnGetInt64;
         public event DataEvent OnGetArray;
+        public event DataEvent OnGetString;
         #endregion 
         #endregion
-    }}
+    }
+}

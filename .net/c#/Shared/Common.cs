@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 using wclCommon;
 
@@ -15,6 +16,7 @@ namespace RfCommClientServer
     internal delegate void Int32Received(Object Sender, Int32 Data);
     internal delegate void Int64Received(Object Sender, Int64 Data);
     internal delegate void ArrayReceived(Object Sender, Byte[] Data);
+    internal delegate void StringReceived(Object Sender, String Data);
     #endregion
 
     internal delegate void DataEvent(Object Sender);
@@ -42,6 +44,7 @@ namespace RfCommClientServer
         public const Byte CMD_INT32 = 0x07;
         public const Byte CMD_INT64 = 0x08;
         public const Byte CMD_ARRAY = 0x09;
+        public const Byte CMD_STRING = 0x0A;
 
         public const Byte CMD_ERROR = 0x0F;
         #endregion
@@ -56,6 +59,7 @@ namespace RfCommClientServer
         public const Byte CMD_SEND_INT32 = CMD_FLAG_SEND | CMD_INT32;
         public const Byte CMD_SEND_INT64 = CMD_FLAG_SEND | CMD_INT64;
         public const Byte CMD_SEND_ARRAY = CMD_FLAG_SEND | CMD_ARRAY;
+        public const Byte CMD_SEND_STRING = CMD_FLAG_SEND | CMD_STRING;
         #endregion
 
         #region Get commands.
@@ -68,6 +72,7 @@ namespace RfCommClientServer
         public const Byte CMD_GET_INT32 = CMD_FLAG_GET | CMD_INT32;
         public const Byte CMD_GET_INT64 = CMD_FLAG_GET | CMD_INT64;
         public const Byte CMD_GET_ARRAY = CMD_FLAG_GET | CMD_ARRAY;
+        public const Byte CMD_GET_STRING = CMD_FLAG_GET | CMD_STRING;
         #endregion
 
         #region Error commands.
@@ -170,6 +175,18 @@ namespace RfCommClientServer
             return Cmd;
         }
 
+        public static Byte[] Create(String Data)
+        {
+            Byte[] Str = Encoding.UTF8.GetBytes(Data);
+            UInt16 Len = (UInt16)(3 + Str.Length);
+            Byte[] Cmd = new Byte[Len];
+            Cmd[0] = wclHelpers.HiByte(Len);
+            Cmd[1] = wclHelpers.LoByte(Len);
+            Cmd[2] = Commands.CMD_SEND_STRING;
+            Array.Copy(Str, 0, Cmd, 3, Str.Length);
+            return Cmd;
+        }
+
         public static Byte[] Create(Int32 Error)
         {
             Byte[] Cmd = new Byte[7];
@@ -250,6 +267,12 @@ namespace RfCommClientServer
                 OnArrayReceived(this, Data);
         }
 
+        private void DoStringReceived(String Data)
+        {
+            if (OnStringReceived != null)
+                OnStringReceived(this, Data);
+        }
+
         private void DoGetByte()
         {
             if (OnGetByte != null)
@@ -302,6 +325,12 @@ namespace RfCommClientServer
         {
             if (OnGetArray != null)
                 OnGetArray(this);
+        }
+
+        private void DoGetString()
+        {
+            if (OnGetString != null)
+                OnGetString(this);
         }
 
         private void DoError(Int32 Error)
@@ -366,6 +395,14 @@ namespace RfCommClientServer
                         DoArrayReceived(Arr);
                     }
                     break;
+
+                case Commands.CMD_STRING:
+                    if (Data.Length > 1)
+                    {
+                        String Str = Encoding.UTF8.GetString(Data, 1, Data.Length - 1);
+                        DoStringReceived(Str);
+                    }
+                    break;
             }
         }
 
@@ -409,6 +446,10 @@ namespace RfCommClientServer
 
                     case Commands.CMD_ARRAY:
                         DoGetArray();
+                        break;
+
+                    case Commands.CMD_STRING:
+                        DoGetString();
                         break;
                 }
             }
@@ -482,6 +523,7 @@ namespace RfCommClientServer
             OnInt32Received = null;
             OnInt64Received = null;
             OnArrayReceived = null;
+            OnStringReceived = null;
 
             OnGetByte = null;
             OnGetUIn16 = null;
@@ -492,6 +534,7 @@ namespace RfCommClientServer
             OnGetInt32 = null;
             OnGetInt64 = null;
             OnGetArray = null;
+            OnGetString = null;
 
             OnError = null;
         }
@@ -525,6 +568,7 @@ namespace RfCommClientServer
         public event Int32Received OnInt32Received;
         public event Int64Received OnInt64Received;
         public event ArrayReceived OnArrayReceived;
+        public event StringReceived OnStringReceived;
 
         public event DataEvent OnGetByte;
         public event DataEvent OnGetUIn16;
@@ -535,6 +579,7 @@ namespace RfCommClientServer
         public event DataEvent OnGetInt32;
         public event DataEvent OnGetInt64;
         public event DataEvent OnGetArray;
+        public event DataEvent OnGetString;
 
         public event ErrorEvent OnError;
     };

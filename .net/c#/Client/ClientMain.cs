@@ -99,6 +99,7 @@ namespace RfCommClient
             Proc.OnInt32Received += Proc_OnInt32Received;
             Proc.OnInt64Received += Proc_OnInt64Received;
             Proc.OnArrayReceived += Proc_OnArrayReceived;
+            Proc.OnStringReceived += Proc_OnStringReceived;
 
             Proc.OnError += Proc_OnError;
         }
@@ -158,6 +159,11 @@ namespace RfCommClient
         private void Proc_OnArrayReceived(Object Sender, Byte[] Data)
         {
             Trace("Array received: " + Data.Length.ToString());
+        }
+
+        private void Proc_OnStringReceived(Object Sender, String Data)
+        {
+            Trace("String received: " + Data);
         }
         #endregion
 
@@ -381,6 +387,18 @@ namespace RfCommClient
                     Trace("Write failed", Res);
             }
         }
+
+        private void btSendString_Click(object sender, EventArgs e)
+        {
+            if (FClient.Processor == null)
+                Trace("Data processor not created");
+            else
+            {
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData("Request from client");
+                if (Res != wclErrors.WCL_E_SUCCESS)
+                    Trace("Write failed", Res);
+            }
+        }
         #endregion
 
         #region Get data
@@ -487,6 +505,18 @@ namespace RfCommClient
             else
             {
                 Int32 Res = ((ClientDataProcessor)FClient.Processor).GetArray();
+                if (Res != wclErrors.WCL_E_SUCCESS)
+                    Trace("Get failed", Res);
+            }
+        }
+
+        private void btGetString_Click(object sender, EventArgs e)
+        {
+            if (FClient.Processor == null)
+                Trace("Data processor not created");
+            else
+            {
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).GetString();
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Get failed", Res);
             }

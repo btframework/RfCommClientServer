@@ -55,6 +55,8 @@ namespace RfCommClient
             this.btGetInt32 = new System.Windows.Forms.Button();
             this.btGetInt64 = new System.Windows.Forms.Button();
             this.btGetArray = new System.Windows.Forms.Button();
+            this.btSendString = new System.Windows.Forms.Button();
+            this.btGetString = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btDiscover
@@ -312,11 +314,33 @@ namespace RfCommClient
             this.btGetArray.UseVisualStyleBackColor = true;
             this.btGetArray.Click += new System.EventHandler(this.btGetArray_Click);
             // 
+            // btSendString
+            // 
+            this.btSendString.Location = new System.Drawing.Point(336, 181);
+            this.btSendString.Name = "btSendString";
+            this.btSendString.Size = new System.Drawing.Size(75, 23);
+            this.btSendString.TabIndex = 24;
+            this.btSendString.Text = "Send String";
+            this.btSendString.UseVisualStyleBackColor = true;
+            this.btSendString.Click += new System.EventHandler(this.btSendString_Click);
+            // 
+            // btGetString
+            // 
+            this.btGetString.Location = new System.Drawing.Point(336, 255);
+            this.btGetString.Name = "btGetString";
+            this.btGetString.Size = new System.Drawing.Size(75, 23);
+            this.btGetString.TabIndex = 25;
+            this.btGetString.Text = "Get String";
+            this.btGetString.UseVisualStyleBackColor = true;
+            this.btGetString.Click += new System.EventHandler(this.btGetString_Click);
+            // 
             // fmClientMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(435, 501);
+            this.Controls.Add(this.btGetString);
+            this.Controls.Add(this.btSendString);
             this.Controls.Add(this.btGetArray);
             this.Controls.Add(this.btGetInt64);
             this.Controls.Add(this.btGetInt32);
@@ -379,6 +403,8 @@ namespace RfCommClient
         private System.Windows.Forms.Button btGetInt32;
         private System.Windows.Forms.Button btGetInt64;
         private System.Windows.Forms.Button btGetArray;
+        private System.Windows.Forms.Button btSendString;
+        private System.Windows.Forms.Button btGetString;
     }
 }
 

@@ -70,6 +70,7 @@ namespace RfCommServer
             Proc.OnInt32Received += Proc_OnInt32Received;
             Proc.OnInt64Received += Proc_OnInt64Received;
             Proc.OnArrayReceived += Proc_OnArrayReceived;
+            Proc.OnStringReceived += Proc_OnStringReceived;
 
             Proc.OnGetByte += Proc_OnGetByte;
             Proc.OnGetUIn16 += Proc_OnGetUIn16;
@@ -80,6 +81,7 @@ namespace RfCommServer
             Proc.OnGetInt32 += Proc_OnGetInt32;
             Proc.OnGetInt64 += Proc_OnGetInt64;
             Proc.OnGetArray += Proc_OnGetArray;
+            Proc.OnGetString += Proc_OnGetString;
         }
 
         private void FServer_OnConnect(Object Sender, wclRfCommServerClientConnection Client, Int32 Error)
@@ -139,6 +141,11 @@ namespace RfCommServer
         {
             Trace("Array received: " + Data.Length.ToString());
         }
+
+        private void Proc_OnStringReceived(Object Sender, String Data)
+        {
+            Trace("String received: " + Data);
+        }
         #endregion
 
         #region Get data.
@@ -190,6 +197,11 @@ namespace RfCommServer
             Int32 Res = ((ServerDataProcessor)Sender).WriteData(Arr);
             if (Res != wclErrors.WCL_E_SUCCESS)
                 Trace("Write failed", Res);
+        }
+
+        private void Proc_OnGetString(Object Sender)
+        {
+            ((ServerDataProcessor)Sender).WriteData("Answer from server");
         }
         #endregion
         #endregion
