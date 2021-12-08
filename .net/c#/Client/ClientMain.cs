@@ -115,44 +115,44 @@ namespace RfCommClient
 
         #region Data processor events.
         #region Data received.
-        private void Proc_OnByteReceived(object Sender, byte Data)
+        private void Proc_OnByteReceived(Object Sender, Byte Data)
         {
-            Trace("Byte received: " + Data.ToString());
+            Trace("Byte received: " + Data.ToString("X2"));
         }
 
         private void Proc_OnUInt16Received(Object Sender, UInt16 Data)
         {
-            Trace("UInt16 received: " + Data.ToString());
+            Trace("UInt16 received: " + Data.ToString("X4"));
         }
 
         private void Proc_OnUInt32Received(Object Sender, UInt32 Data)
         {
-            Trace("UInt32 received: " + Data.ToString());
+            Trace("UInt32 received: " + Data.ToString("X8"));
         }
 
         private void Proc_OnUInt64Received(Object Sender, UInt64 Data)
         {
-            Trace("UInt64 received: " + Data.ToString());
+            Trace("UInt64 received: " + Data.ToString("X16"));
         }
 
         private void Proc_OnSByteReceived(Object Sender, SByte Data)
         {
-            Trace("SByte received: " + Data.ToString());
+            Trace("SByte received: " + Data.ToString("X2"));
         }
 
         private void Proc_OnInt16Received(Object Sender, Int16 Data)
         {
-            Trace("Int16 received: " + Data.ToString());
+            Trace("Int16 received: " + Data.ToString("X4"));
         }
 
         private void Proc_OnInt32Received(Object Sender, Int32 Data)
         {
-            Trace("Int32 received: " + Data.ToString());
+            Trace("Int32 received: " + Data.ToString("X8"));
         }
 
         private void Proc_OnInt64Received(Object Sender, Int64 Data)
         {
-            Trace("Int64 received: " + Data.ToString());
+            Trace("Int64 received: " + Data.ToString("X16"));
         }
 
         private void Proc_OnArrayReceived(Object Sender, Byte[] Data)
@@ -283,7 +283,7 @@ namespace RfCommClient
             }
         }
 
-        private void btSendUInt16_Click(object sender, EventArgs e)
+        private void btSendUInt16_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -295,7 +295,7 @@ namespace RfCommClient
             }
         }
 
-        private void btSendUInt32_Click(object sender, EventArgs e)
+        private void btSendUInt32_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -307,7 +307,7 @@ namespace RfCommClient
             }
         }
 
-        private void btSendUInt64_Click(object sender, EventArgs e)
+        private void btSendUInt64_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -319,7 +319,7 @@ namespace RfCommClient
             }
         }
 
-        private void btSendSByte_Click(object sender, EventArgs e)
+        private void btSendSByte_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -331,7 +331,7 @@ namespace RfCommClient
             }
         }
 
-        private void btSendInt16_Click(object sender, EventArgs e)
+        private void btSendInt16_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -343,7 +343,7 @@ namespace RfCommClient
             }
         }
 
-        private void btSendInt32_Click(object sender, EventArgs e)
+        private void btSendInt32_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -355,7 +355,7 @@ namespace RfCommClient
             }
         }
 
-        private void btSendInt64_Click(object sender, EventArgs e)
+        private void btSendInt64_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -367,7 +367,7 @@ namespace RfCommClient
             }
         }
 
-        private void btSendArray_Click(object sender, EventArgs e)
+        private void btSendArray_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -384,7 +384,7 @@ namespace RfCommClient
         #endregion
 
         #region Get data
-        private void btGetByte_Click(object sender, EventArgs e)
+        private void btGetByte_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -396,7 +396,7 @@ namespace RfCommClient
             }
         }
 
-        private void btGetUInt16_Click(object sender, EventArgs e)
+        private void btGetUInt16_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -408,7 +408,7 @@ namespace RfCommClient
             }
         }
 
-        private void btGetUInt32_Click(object sender, EventArgs e)
+        private void btGetUInt32_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -420,7 +420,7 @@ namespace RfCommClient
             }
         }
 
-        private void btGetUInt64_Click(object sender, EventArgs e)
+        private void btGetUInt64_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -432,7 +432,7 @@ namespace RfCommClient
             }
         }
 
-        private void btGetSByte_Click(object sender, EventArgs e)
+        private void btGetSByte_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -444,7 +444,7 @@ namespace RfCommClient
             }
         }
 
-        private void btGetInt16_Click(object sender, EventArgs e)
+        private void btGetInt16_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -456,7 +456,7 @@ namespace RfCommClient
             }
         }
 
-        private void btGetInt32_Click(object sender, EventArgs e)
+        private void btGetInt32_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -468,7 +468,7 @@ namespace RfCommClient
             }
         }
 
-        private void btGetInt64_Click(object sender, EventArgs e)
+        private void btGetInt64_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");
@@ -480,7 +480,7 @@ namespace RfCommClient
             }
         }
 
-        private void btGetArray_Click(object sender, EventArgs e)
+        private void btGetArray_Click(Object sender, EventArgs e)
         {
             if (FClient.Processor == null)
                 Trace("Data processor not created");

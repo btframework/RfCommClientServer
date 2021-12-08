@@ -331,9 +331,9 @@ namespace RfCommClientServer
 
                 case Commands.CMD_UINT64:
                     if (Data.Length == 9)
-                        DoUInt64Received((UInt32)((Data[1] << 56) | (Data[2] << 48) | (Data[3] << 40) |
-                            (Data[4] << 32) | (Data[5] << 24) | (Data[6] << 16) |
-                            (Data[7] << 8) | Data[8]));
+                        DoUInt64Received((UInt64)(((UInt64)Data[1] << 56) | ((UInt64)Data[2] << 48) |
+                            ((UInt64)Data[3] << 40) | ((UInt64)Data[4] << 32) | (UInt64)Data[5] << 24) |
+                            ((UInt64)Data[6] << 16) | ((UInt64)Data[7] << 8) | (UInt64)Data[8]);
                     break;
 
                 case Commands.CMD_SBYTE:
@@ -353,9 +353,9 @@ namespace RfCommClientServer
 
                 case Commands.CMD_INT64:
                     if (Data.Length == 9)
-                        DoInt64Received((Int32)((Data[1] << 56) | (Data[2] << 48) | (Data[3] << 40) |
-                            (Data[4] << 32) | (Data[5] << 24) | (Data[6] << 16) |
-                            (Data[7] << 8) | Data[8]));
+                        DoInt64Received((Int64)(((Int64)Data[1] << 56) | ((Int64)Data[2] << 48) |
+                            ((Int64)Data[3] << 40) | ((Int64)Data[4] << 32) | ((Int64)Data[5] << 24) | 
+                            ((Int64)Data[6] << 16) | ((Int64)Data[7] << 8) | (Int64)Data[8]));
                     break;
 
                 case Commands.CMD_ARRAY:

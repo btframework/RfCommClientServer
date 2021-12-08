@@ -95,44 +95,44 @@ namespace RfCommServer
 
         #region Data processor events.
         #region Data received.
-        private void Proc_OnByteReceived(object Sender, byte Data)
+        private void Proc_OnByteReceived(Object Sender, Byte Data)
         {
-            Trace("Byte received: " + Data.ToString());
+            Trace("Byte received: " + Data.ToString("X2"));
         }
 
         private void Proc_OnUInt16Received(Object Sender, UInt16 Data)
         {
-            Trace("UInt16 received: " + Data.ToString());
+            Trace("UInt16 received: " + Data.ToString("X4"));
         }
 
         private void Proc_OnUInt32Received(Object Sender, UInt32 Data)
         {
-            Trace("UInt32 received: " + Data.ToString());
+            Trace("UInt32 received: " + Data.ToString("X8"));
         }
 
         private void Proc_OnUInt64Received(Object Sender, UInt64 Data)
         {
-            Trace("UInt64 received: " + Data.ToString());
+            Trace("UInt64 received: " + Data.ToString("X16"));
         }
 
         private void Proc_OnSByteReceived(Object Sender, SByte Data)
         {
-            Trace("SByte received: " + Data.ToString());
+            Trace("SByte received: " + Data.ToString("X2"));
         }
 
         private void Proc_OnInt16Received(Object Sender, Int16 Data)
         {
-            Trace("Int16 received: " + Data.ToString());
+            Trace("Int16 received: " + Data.ToString("X4"));
         }
 
         private void Proc_OnInt32Received(Object Sender, Int32 Data)
         {
-            Trace("Int32 received: " + Data.ToString());
+            Trace("Int32 received: " + Data.ToString("X8"));
         }
 
         private void Proc_OnInt64Received(Object Sender, Int64 Data)
         {
-            Trace("Int64 received: " + Data.ToString());
+            Trace("Int64 received: " + Data.ToString("X16"));
         }
 
         private void Proc_OnArrayReceived(Object Sender, Byte[] Data)
@@ -248,6 +248,13 @@ namespace RfCommServer
                 Trace("Get classic radio failed", Res);
             else
             {
+                // Do not forget to switch to connectable and discoverable mode!
+                Res = Radio.SetConnectable(true);
+                if (Res != wclErrors.WCL_E_SUCCESS)
+                    Trace("Set connectable failed", Res);
+                Res = Radio.SetDiscoverable(true);
+                if (Res != wclErrors.WCL_E_SUCCESS)
+                    Trace("Set discoverable failed", Res);
                 Res = FServer.Listen(Radio);
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Listen failed", Res);
