@@ -118,47 +118,50 @@ namespace RfCommClient
         #region Data received.
         private void Proc_OnByteReceived(Object Sender, Byte Data)
         {
-            Trace("Byte received: " + Data.ToString("X2"));
+            Trace("Byte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnUInt16Received(Object Sender, UInt16 Data)
         {
-            Trace("UInt16 received: " + Data.ToString("X4"));
+            Trace("UInt16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnUInt32Received(Object Sender, UInt32 Data)
         {
-            Trace("UInt32 received: " + Data.ToString("X8"));
+            Trace("UInt32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnUInt64Received(Object Sender, UInt64 Data)
         {
-            Trace("UInt64 received: " + Data.ToString("X16"));
+            Trace("UInt64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnSByteReceived(Object Sender, SByte Data)
         {
-            Trace("SByte received: " + Data.ToString("X2"));
+            Trace("SByte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnInt16Received(Object Sender, Int16 Data)
         {
-            Trace("Int16 received: " + Data.ToString("X4"));
+            Trace("Int16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnInt32Received(Object Sender, Int32 Data)
         {
-            Trace("Int32 received: " + Data.ToString("X8"));
+            Trace("Int32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnInt64Received(Object Sender, Int64 Data)
         {
-            Trace("Int64 received: " + Data.ToString("X16"));
+            Trace("Int64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnArrayReceived(Object Sender, Byte[] Data)
         {
             Trace("Array received: " + Data.Length.ToString());
+            String Hex = BitConverter.ToString(Data);
+            Hex = Hex.Replace("-", "");
+            lbLog.Items.Add(Hex);
         }
 
         private void Proc_OnStringReceived(Object Sender, String Data)
@@ -283,7 +286,7 @@ namespace RfCommClient
                 Trace("Data processor not created");
             else
             {
-                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((Byte)0x81);
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((Byte)0x11);
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Write failed", Res);
             }
@@ -295,7 +298,7 @@ namespace RfCommClient
                 Trace("Data processor not created");
             else
             {
-                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((UInt16)0x8181);
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((UInt16)0x1112);
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Write failed", Res);
             }
@@ -307,7 +310,7 @@ namespace RfCommClient
                 Trace("Data processor not created");
             else
             {
-                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((UInt32)0x81818181);
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((UInt32)0x11121384);
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Write failed", Res);
             }
@@ -319,7 +322,7 @@ namespace RfCommClient
                 Trace("Data processor not created");
             else
             {
-                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((UInt64)0x8181818181818181);
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((UInt64)0x1112131415161718);
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Write failed", Res);
             }
@@ -331,7 +334,7 @@ namespace RfCommClient
                 Trace("Data processor not created");
             else
             {
-                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((SByte)0x18);
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData(unchecked((SByte)0xF8));
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Write failed", Res);
             }
@@ -343,7 +346,7 @@ namespace RfCommClient
                 Trace("Data processor not created");
             else
             {
-                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((Int16)0x1818);
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData(unchecked((Int16)0xF112));
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Write failed", Res);
             }
@@ -355,7 +358,7 @@ namespace RfCommClient
                 Trace("Data processor not created");
             else
             {
-                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((Int32)0x18181818);
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData(unchecked((Int32)0xF1121314));
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Write failed", Res);
             }
@@ -367,7 +370,7 @@ namespace RfCommClient
                 Trace("Data processor not created");
             else
             {
-                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData((Int64)0x1818181818181818);
+                Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData(unchecked((Int64)0xF112131415161718));
                 if (Res != wclErrors.WCL_E_SUCCESS)
                     Trace("Write failed", Res);
             }

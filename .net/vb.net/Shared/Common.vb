@@ -130,8 +130,8 @@ Friend Module CommandBuilder
     End Function
 
     Public Function Create(Data As UInt64, Signed As Boolean) As Byte()
-        Dim Hi As UInt32 = CType(Data >> 32, UInt32)
-        Dim Lo As UInt32 = CType(Data And &HFFFFFFFFUI, UInt32)
+        Dim Hi As UInt32 = CUInt(Data >> 32)
+        Dim Lo As UInt32 = CUInt(Data And &HFFFFFFFFUI)
         Dim Cmd As Byte() = New Byte(10) {}
         Cmd(0) = &H0
         Cmd(1) = &HB
@@ -152,7 +152,7 @@ Friend Module CommandBuilder
     End Function
 
     Public Function Create(Data As Byte()) As Byte()
-        Dim Len As UInt16 = CType(3 + Data.Length, UInt16)
+        Dim Len As UInt16 = CUShort(3 + Data.Length)
         Dim Cmd As Byte() = New Byte(Len - 1) {}
         Cmd(0) = wclHelpers.HiByte(Len)
         Cmd(1) = wclHelpers.LoByte(Len)
@@ -163,7 +163,7 @@ Friend Module CommandBuilder
 
     Public Function Create(Data As String) As Byte()
         Dim Str As Byte() = Text.Encoding.UTF8.GetBytes(Data)
-        Dim Len As UInt16 = CType(3 + Str.Length, UInt16)
+        Dim Len As UInt16 = CUShort(3 + Str.Length)
         Dim Cmd As Byte() = New Byte(Len - 1) {}
         Cmd(0) = wclHelpers.HiByte(Len)
         Cmd(1) = wclHelpers.LoByte(Len)
@@ -177,10 +177,10 @@ Friend Module CommandBuilder
         Cmd(0) = &H0
         Cmd(1) = &H7
         Cmd(2) = Commands.CMD_ERROR_CODE
-        Cmd(3) = wclHelpers.HiByte(wclHelpers.HiWord(CType([Error], UInt32)))
-        Cmd(4) = wclHelpers.LoByte(wclHelpers.HiWord(CType([Error], UInt32)))
-        Cmd(5) = wclHelpers.HiByte(wclHelpers.LoWord(CType([Error], UInt32)))
-        Cmd(6) = wclHelpers.LoByte(wclHelpers.LoWord(CType([Error], UInt32)))
+        Cmd(3) = wclHelpers.HiByte(wclHelpers.HiWord(CUInt([Error])))
+        Cmd(4) = wclHelpers.LoByte(wclHelpers.HiWord(CUInt([Error])))
+        Cmd(5) = wclHelpers.HiByte(wclHelpers.LoWord(CUInt([Error])))
+        Cmd(6) = wclHelpers.LoByte(wclHelpers.LoWord(CUInt([Error])))
         Return Cmd
     End Function
 
@@ -331,43 +331,43 @@ Friend Class CommandDecoder
 
             Case Commands.CMD_UINT16
                 If Data.Length = 3 Then
-                    DoUInt16Received(CType((CType(Data(1), UInt16) << 8) Or Data(2), UInt16))
+                    DoUInt16Received(CUShort((CUShort(Data(1)) << 8) Or Data(2)))
                 End If
 
             Case Commands.CMD_UINT32
                 If Data.Length = 5 Then
-                    DoUInt32Received(CType((CType(Data(1), UInt32) << 24) Or (CType(Data(2), UInt32) << 16) Or
-                                     (CType(Data(3), UInt32) << 8) Or Data(4), UInt32))
+                    DoUInt32Received(CUInt((CUInt(Data(1)) << 24) Or (CUInt(Data(2)) << 16) Or
+                                     (CUInt(Data(3)) << 8) Or Data(4)))
                 End If
 
             Case Commands.CMD_UINT64
                 If Data.Length = 9 Then
-                    DoUInt64Received(CType((CType(Data(1), UInt64) << 56) Or (CType(Data(2), UInt64) << 48) Or
-                                     (CType(Data(3), UInt64) << 40) Or (CType(Data(4), UInt64) << 32) Or (CType(Data(5), UInt64) << 24) Or
-                                     (CType(Data(6), UInt64) << 16) Or (CType(Data(7), UInt64) << 8) Or CType(Data(8), UInt64), UInt64))
+                    DoUInt64Received(CULng((CULng(Data(1)) << 56) Or (CULng(Data(2)) << 48) Or
+                                     (CULng(Data(3)) << 40) Or (CULng(Data(4)) << 32) Or (CULng(Data(5)) << 24) Or
+                                     (CULng(Data(6)) << 16) Or (CULng(Data(7)) << 8) Or CULng(Data(8))))
                 End If
 
             Case Commands.CMD_SBYTE
                 If Data.Length = 2 Then
-                    DoSByteReceived(CType(Data(1), SByte))
+                    DoSByteReceived(CSByte(Data(1)))
                 End If
 
             Case Commands.CMD_INT16
                 If Data.Length = 3 Then
-                    DoInt16Received(CType((CType(Data(1), Int16) << 8), Int16) Or Data(2))
+                    DoInt16Received(CShort((CShort(Data(1)) << 8)) Or Data(2))
                 End If
 
             Case Commands.CMD_INT32
                 If Data.Length = 5 Then
-                    DoInt32Received(CType((CType(Data(1), Int32) << 24) Or (CType(Data(2), Int32) << 16) Or
-                                    (CType(Data(3), Int32) << 8) Or Data(4), Int32))
+                    DoInt32Received(CInt((CInt(Data(1)) << 24) Or (CInt(Data(2)) << 16) Or
+                                    (CInt(Data(3)) << 8) Or Data(4)))
                 End If
 
             Case Commands.CMD_INT64
                 If Data.Length = 9 Then
-                    DoInt64Received(CType((CType(Data(1), Int64) << 56) Or (CType(Data(2), Int64) << 48) Or
-                            (CType(Data(3), Int64) << 40) Or (CType(Data(4), Int64) << 32) Or (CType(Data(5), Int64) << 24) Or
-                            (CType(Data(6), Int64) << 16) Or (CType(Data(7), Int64) << 8) Or CType(Data(8), Int64), Int64))
+                    DoInt64Received(CLng((CLng(Data(1)) << 56) Or (CLng(Data(2)) << 48) Or
+                            (CLng(Data(3)) << 40) Or (CLng(Data(4)) << 32) Or (CLng(Data(5)) << 24) Or
+                            (CLng(Data(6)) << 16) Or (CLng(Data(7)) << 8) Or CLng(Data(8))))
                 End If
 
             Case Commands.CMD_ARRAY
@@ -424,8 +424,8 @@ Friend Class CommandDecoder
     Private Sub DecodeErrorCommand(Data As Byte())
         If Data.Length = 5 Then
             If Data(0) = Commands.CMD_ERROR_CODE Then
-                Dim [Error] As Int32 = (CType(Data(1), Int32) << 24) Or (CType(Data(2), Int32) << 16) Or
-                    (CType(Data(3), Int32) << 8) Or Data(4)
+                Dim [Error] As Int32 = (CInt(Data(1)) << 24) Or (CInt(Data(2)) << 16) Or
+                    (CInt(Data(3)) << 8) Or Data(4)
                 DoError([Error])
             End If
         End If
@@ -450,7 +450,7 @@ Friend Class CommandDecoder
     Private Sub DataReceived()
         While FBuffer IsNot Nothing And FBuffer.Length > 2
             ' Data length includes length bytes!
-            Dim Len As UInt16 = CType((CType(FBuffer(0), UInt16) << 8) Or FBuffer(1), UInt16)
+            Dim Len As UInt16 = CUShort((CUShort(FBuffer(0)) << 8) Or FBuffer(1))
             If Len > FBuffer.Length Then
                 Exit While
             End If

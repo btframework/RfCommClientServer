@@ -127,25 +127,25 @@
 
 #Region "Signed"
     Public Overloads Function WriteData(Data As SByte) As Int32
-        Return Write(CommandBuilder.Create(CType(Data, Byte), True))
+        Return Write(CommandBuilder.Create(CByte(Data), True))
     End Function
 
     Public Overloads Function WriteData(Data As Int16) As Int32
-        Return Write(CommandBuilder.Create(CType(Data, UInt16), True))
+        Return Write(CommandBuilder.Create(CUShort(Data), True))
     End Function
 
     Public Overloads Function WriteData(Data As Int32) As Int32
-        Return Write(CommandBuilder.Create(CType(Data, UInt32), True))
+        Return Write(CommandBuilder.Create(CUInt(Data), True))
     End Function
 
     Public Overloads Function WriteData(Data As Int64) As Int32
-        Return Write(CommandBuilder.Create(CType(Data, UInt64), True))
+        Return Write(CommandBuilder.Create(CULng(Data), True))
     End Function
 #End Region
 
 #Region "Array"
     Public Overloads Function WriteData(Data As Byte()) As Int32
-        If Data Is Nothing Or Data.Length = 0 Or CType(Data.Length, UInt32) > UInt16.MaxValue - 3 Then
+        If Data Is Nothing Or Data.Length = 0 Or CUInt(Data.Length) > UInt16.MaxValue - 3 Then
             Return wclErrors.WCL_E_INVALID_ARGUMENT
         End If
 
@@ -153,7 +153,7 @@
     End Function
 
     Public Overloads Function WriteData(Data As String) As Int32
-        If Data Is Nothing Or Data.Length = 0 Or CType(Data.Length, UInt32) > UInt16.MaxValue - 3 Then
+        If Data Is Nothing Or Data.Length = 0 Or CUInt(Data.Length) > UInt16.MaxValue - 3 Then
             Return wclErrors.WCL_E_INVALID_ARGUMENT
         End If
 

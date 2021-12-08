@@ -99,47 +99,50 @@ namespace RfCommServer
         #region Data received.
         private void Proc_OnByteReceived(Object Sender, Byte Data)
         {
-            Trace("Byte received: " + Data.ToString("X2"));
+            Trace("Byte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnUInt16Received(Object Sender, UInt16 Data)
         {
-            Trace("UInt16 received: " + Data.ToString("X4"));
+            Trace("UInt16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnUInt32Received(Object Sender, UInt32 Data)
         {
-            Trace("UInt32 received: " + Data.ToString("X8"));
+            Trace("UInt32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnUInt64Received(Object Sender, UInt64 Data)
         {
-            Trace("UInt64 received: " + Data.ToString("X16"));
+            Trace("UInt64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnSByteReceived(Object Sender, SByte Data)
         {
-            Trace("SByte received: " + Data.ToString("X2"));
+            Trace("SByte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnInt16Received(Object Sender, Int16 Data)
         {
-            Trace("Int16 received: " + Data.ToString("X4"));
+            Trace("Int16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnInt32Received(Object Sender, Int32 Data)
         {
-            Trace("Int32 received: " + Data.ToString("X8"));
+            Trace("Int32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnInt64Received(Object Sender, Int64 Data)
         {
-            Trace("Int64 received: " + Data.ToString("X16"));
+            Trace("Int64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")");
         }
 
         private void Proc_OnArrayReceived(Object Sender, Byte[] Data)
         {
             Trace("Array received: " + Data.Length.ToString());
+            String Hex = BitConverter.ToString(Data);
+            Hex = Hex.Replace("-", "");
+            lbLog.Items.Add(Hex);
         }
 
         private void Proc_OnStringReceived(Object Sender, String Data)
@@ -151,42 +154,42 @@ namespace RfCommServer
         #region Get data.
         private void Proc_OnGetByte(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((Byte)0x25);
+            ((ServerDataProcessor)Sender).WriteData((Byte)0xF5);
         }
 
         private void Proc_OnGetUIn16(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((UInt16)0x2525);
+            ((ServerDataProcessor)Sender).WriteData((UInt16)0xF551);
         }
 
         private void Proc_OnGetUIn32(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((UInt32)0x25252525);
+            ((ServerDataProcessor)Sender).WriteData((UInt32)0xF5515253);
         }
 
         private void Proc_OnGetUInt64(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((UInt64)0x2525252525252525);
+            ((ServerDataProcessor)Sender).WriteData((UInt64)0xF551525354555657);
         }
 
         private void Proc_OnGetSByte(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((SByte)0x25);
+            ((ServerDataProcessor)Sender).WriteData(unchecked((SByte)0xF5));
         }
 
         private void Proc_OnGetInt16(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((Int16)0x2525);
+            ((ServerDataProcessor)Sender).WriteData(unchecked((Int16)0xF551));
         }
 
         private void Proc_OnGetInt32(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((Int32)0x25252525);
+            ((ServerDataProcessor)Sender).WriteData(unchecked((Int32)0xF5515253));
         }
 
         private void Proc_OnGetInt64(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((Int64)0x2525252525252525);
+            ((ServerDataProcessor)Sender).WriteData(unchecked((Int64)0xF551525354555657));
         }
 
         private void Proc_OnGetArray(Object Sender)
