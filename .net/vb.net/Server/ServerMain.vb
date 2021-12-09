@@ -54,8 +54,8 @@
         AddHandler Proc.OnStringReceived, AddressOf Proc_OnStringReceived
 
         AddHandler Proc.OnGetByte, AddressOf Proc_OnGetByte
-        AddHandler Proc.OnGetUIn16, AddressOf Proc_OnGetUIn16
-        AddHandler Proc.OnGetUIn32, AddressOf Proc_OnGetUIn32
+        AddHandler Proc.OnGetUInt16, AddressOf Proc_OnGetUInt16
+        AddHandler Proc.OnGetUInt32, AddressOf Proc_OnGetUInt32
         AddHandler Proc.OnGetUInt64, AddressOf Proc_OnGetUInt64
         AddHandler Proc.OnGetSByte, AddressOf Proc_OnGetSByte
         AddHandler Proc.OnGetInt16, AddressOf Proc_OnGetInt16
@@ -125,11 +125,11 @@
         CType(Sender, ServerDataProcessor).WriteData(CByte(&HF5))
     End Sub
 
-    Private Sub Proc_OnGetUIn16(Sender As Object)
+    Private Sub Proc_OnGetUInt16(Sender As Object)
         CType(Sender, ServerDataProcessor).WriteData(CUShort(&HF551))
     End Sub
 
-    Private Sub Proc_OnGetUIn32(Sender As Object)
+    Private Sub Proc_OnGetUInt32(Sender As Object)
         CType(Sender, ServerDataProcessor).WriteData(CUInt(&HF5515253))
     End Sub
 
@@ -181,7 +181,7 @@
         FServer.Authentication = False
         FServer.Encryption = False
         ' Use custom service's UUID.
-        FServer.Service = New Guid("{CA80C97C-06B3-4E65-9CEE-65BB0B11BC92}")
+        FServer.Service = ServiceUuid
         AddHandler FServer.OnClosed, AddressOf FServer_OnClosed
         AddHandler FServer.OnConnect, AddressOf FServer_OnConnect
         AddHandler FServer.OnCreateProcessor, AddressOf FServer_OnCreateProcessor

@@ -61,10 +61,6 @@
         Trace("Client disconnected", Reason)
     End Sub
 
-    Private Sub FClient_OnData(Sender As Object, Data As Byte())
-        Trace("Data received: " + Data.Length)
-    End Sub
-
     Private Sub FClient_OnCreateProcessor(Sender As Object, Connection As wclClientDataConnection)
         Trace("Creating data processor")
         Dim Proc As ClientDataProcessor = New ClientDataProcessor(Connection)
@@ -158,7 +154,7 @@
         FClient.Authentication = False
         FClient.Encryption = False
         ' Use custom service's UUID.
-        FClient.Service = New Guid("{CA80C97C-06B3-4E65-9CEE-65BB0B11BC92}")
+        FClient.Service = ServiceUuid
         AddHandler FClient.OnConnect, AddressOf FClient_OnConnect
         AddHandler FClient.OnDisconnect, AddressOf FClient_OnDisconnect
         AddHandler FClient.OnCreateProcessor, AddressOf FClient_OnCreateProcessor

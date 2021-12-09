@@ -40,15 +40,15 @@
         End If
     End Sub
 
-    Private Sub FDecoder_OnGetUIn32(Sender As Object)
-        If OnGetUIn32Event IsNot Nothing Then
-            RaiseEvent OnGetUIn32(Me)
+    Private Sub FDecoder_OnGetUInt32(Sender As Object)
+        If OnGetUInt32Event IsNot Nothing Then
+            RaiseEvent OnGetUInt32(Me)
         End If
     End Sub
 
-    Private Sub FDecoder_OnGetUIn16(Sender As Object)
-        If OnGetUIn16Event IsNot Nothing Then
-            RaiseEvent OnGetUIn16(Me)
+    Private Sub FDecoder_OnGetUInt16(Sender As Object)
+        If OnGetUInt16Event IsNot Nothing Then
+            RaiseEvent OnGetUInt16(Me)
         End If
     End Sub
 
@@ -146,8 +146,8 @@
         AddHandler FDecoder.OnStringReceived, AddressOf FDecoder_OnStringReceived
 
         AddHandler FDecoder.OnGetByte, AddressOf FDecoder_OnGetByte
-        AddHandler FDecoder.OnGetUIn16, AddressOf FDecoder_OnGetUIn16
-        AddHandler FDecoder.OnGetUIn32, AddressOf FDecoder_OnGetUIn32
+        AddHandler FDecoder.OnGetUInt16, AddressOf FDecoder_OnGetUInt16
+        AddHandler FDecoder.OnGetUInt32, AddressOf FDecoder_OnGetUInt32
         AddHandler FDecoder.OnGetUInt64, AddressOf FDecoder_OnGetUInt64
         AddHandler FDecoder.OnGetSByte, AddressOf FDecoder_OnGetSByte
         AddHandler FDecoder.OnGetInt16, AddressOf FDecoder_OnGetInt16
@@ -168,8 +168,8 @@
         OnStringReceivedEvent = Nothing
 
         OnGetByteEvent = Nothing
-        OnGetUIn16Event = Nothing
-        OnGetUIn32Event = Nothing
+        OnGetUInt16Event = Nothing
+        OnGetUInt32Event = Nothing
         OnGetUInt64Event = Nothing
         OnGetSByteEvent = Nothing
         OnGetInt16Event = Nothing
@@ -257,8 +257,8 @@
 
 #Region "Get events."
     Public Event OnGetByte As DataEvent
-    Public Event OnGetUIn16 As DataEvent
-    Public Event OnGetUIn32 As DataEvent
+    Public Event OnGetUInt16 As DataEvent
+    Public Event OnGetUInt32 As DataEvent
     Public Event OnGetUInt64 As DataEvent
     Public Event OnGetSByte As DataEvent
     Public Event OnGetInt16 As DataEvent

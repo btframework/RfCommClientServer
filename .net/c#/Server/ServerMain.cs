@@ -73,8 +73,8 @@ namespace RfCommServer
             Proc.OnStringReceived += Proc_OnStringReceived;
 
             Proc.OnGetByte += Proc_OnGetByte;
-            Proc.OnGetUIn16 += Proc_OnGetUIn16;
-            Proc.OnGetUIn32 += Proc_OnGetUIn32;
+            Proc.OnGetUInt16 += Proc_OnGetUInt16;
+            Proc.OnGetUInt32 += Proc_OnGetUInt32;
             Proc.OnGetUInt64 += Proc_OnGetUInt64;
             Proc.OnGetSByte += Proc_OnGetSByte;
             Proc.OnGetInt16 += Proc_OnGetInt16;
@@ -157,12 +157,12 @@ namespace RfCommServer
             ((ServerDataProcessor)Sender).WriteData((Byte)0xF5);
         }
 
-        private void Proc_OnGetUIn16(Object Sender)
+        private void Proc_OnGetUInt16(Object Sender)
         {
             ((ServerDataProcessor)Sender).WriteData((UInt16)0xF551);
         }
 
-        private void Proc_OnGetUIn32(Object Sender)
+        private void Proc_OnGetUInt32(Object Sender)
         {
             ((ServerDataProcessor)Sender).WriteData((UInt32)0xF5515253);
         }
@@ -195,7 +195,7 @@ namespace RfCommServer
         private void Proc_OnGetArray(Object Sender)
         {
             Byte[] Arr = new Byte[512];
-            for (UInt16 i = 0; i < 511; i++)
+            for (UInt16 i = 0; i < 512; i++)
                 Arr[i] = wclHelpers.LoByte(i);
             Int32 Res = ((ServerDataProcessor)Sender).WriteData(Arr);
             if (Res != wclErrors.WCL_E_SUCCESS)
@@ -221,7 +221,7 @@ namespace RfCommServer
             FServer.Authentication = false;
             FServer.Encryption = false;
             // Use custom service's UUID.
-            FServer.Service = new Guid("{CA80C97C-06B3-4E65-9CEE-65BB0B11BC92}");
+            FServer.Service = RfCommClientServer.Commands.ServiceUuid;
             FServer.OnClosed += FServer_OnClosed;
             FServer.OnConnect += FServer_OnConnect;
             FServer.OnCreateProcessor += FServer_OnCreateProcessor;

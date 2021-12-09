@@ -80,11 +80,6 @@ namespace RfCommClient
             Trace("Client disconnected", Reason);
         }
 
-        private void FClient_OnData(Object Sender, Byte[] Data)
-        {
-            Trace("Data received: " + Data.Length);
-        }
-
         private void FClient_OnCreateProcessor(Object Sender, wclClientDataConnection Connection)
         {
             Trace("Creating data processor");
@@ -193,7 +188,7 @@ namespace RfCommClient
             FClient.Authentication = false;
             FClient.Encryption = false;
             // Use custom service's UUID.
-            FClient.Service = new Guid("{CA80C97C-06B3-4E65-9CEE-65BB0B11BC92}");
+            FClient.Service = RfCommClientServer.Commands.ServiceUuid;
             FClient.OnConnect += FClient_OnConnect;
             FClient.OnDisconnect += FClient_OnDisconnect;
             FClient.OnCreateProcessor += FClient_OnCreateProcessor;
@@ -383,7 +378,7 @@ namespace RfCommClient
             else
             {
                 Byte[] Arr = new Byte[512];
-                for (UInt16 i = 0; i < 511; i++)
+                for (UInt16 i = 0; i < 512; i++)
                     Arr[i] = wclHelpers.LoByte(i);
                 Int32 Res = ((ClientDataProcessor)FClient.Processor).WriteData(Arr);
                 if (Res != wclErrors.WCL_E_SUCCESS)

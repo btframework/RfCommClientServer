@@ -4,3 +4,9 @@
 /**/lib
 
 *.suo
+*.~pas
+*.~dfm
+*.local
+*.identcache
+*.~dpr
+*.stat

@@ -71,6 +71,10 @@ Friend Module Commands
     Public Const CMD_ERROR_CODE As Byte = CMD_FLAG_ERROR Or CMD_ERROR
 #End Region
 
+#Region "Service's UUID"
+    Public ServiceUuid As Guid = New Guid("{CA80C97C-06B3-4E65-9CEE-65BB0B11BC92}")
+#End Region
+
 #Region "Command checkers"
     Public Function IsCmdSend(Cmd As Byte) As Boolean
         Return ((Cmd And CMD_FLAG_GET) = 0 And (Cmd And CMD_FLAG_ERROR) = 0)
@@ -263,14 +267,14 @@ Friend Class CommandDecoder
     End Sub
 
     Private Sub DoGetUInt16()
-        If OnGetUIn16Event IsNot Nothing Then
-            RaiseEvent OnGetUIn16(Me)
+        If OnGetUInt16Event IsNot Nothing Then
+            RaiseEvent OnGetUInt16(Me)
         End If
     End Sub
 
     Private Sub DoGetUInt32()
-        If OnGetUIn32Event IsNot Nothing Then
-            RaiseEvent OnGetUIn32(Me)
+        If OnGetUInt32Event IsNot Nothing Then
+            RaiseEvent OnGetUInt32(Me)
         End If
     End Sub
 
@@ -485,8 +489,8 @@ Friend Class CommandDecoder
         OnStringReceivedEvent = Nothing
 
         OnGetByteEvent = Nothing
-        OnGetUIn16Event = Nothing
-        OnGetUIn32Event = Nothing
+        OnGetUInt16Event = Nothing
+        OnGetUInt32Event = Nothing
         OnGetUInt64Event = Nothing
         OnGetSByteEvent = Nothing
         OnGetInt16Event = Nothing
@@ -525,8 +529,8 @@ Friend Class CommandDecoder
     Public Event OnStringReceived As StringReceived
 
     Public Event OnGetByte As DataEvent
-    Public Event OnGetUIn16 As DataEvent
-    Public Event OnGetUIn32 As DataEvent
+    Public Event OnGetUInt16 As DataEvent
+    Public Event OnGetUInt32 As DataEvent
     Public Event OnGetUInt64 As DataEvent
     Public Event OnGetSByte As DataEvent
     Public Event OnGetInt16 As DataEvent

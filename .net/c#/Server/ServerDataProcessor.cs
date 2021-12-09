@@ -48,16 +48,16 @@ namespace RfCommServer
                 OnGetUInt64(this);
         }
 
-        private void FDecoder_OnGetUIn32(Object Sender)
+        private void FDecoder_OnGetUInt32(Object Sender)
         {
-            if (OnGetUIn32 != null)
-                OnGetUIn32(this);
+            if (OnGetUInt32 != null)
+                OnGetUInt32(this);
         }
 
-        private void FDecoder_OnGetUIn16(Object Sender)
+        private void FDecoder_OnGetUInt16(Object Sender)
         {
-            if (OnGetUIn16 != null)
-                OnGetUIn16(this);
+            if (OnGetUInt16 != null)
+                OnGetUInt16(this);
         }
 
         private void FDecoder_OnGetByte(Object Sender)
@@ -155,8 +155,8 @@ namespace RfCommServer
             FDecoder.OnStringReceived += FDecoder_OnStringReceived;
 
             FDecoder.OnGetByte += FDecoder_OnGetByte;
-            FDecoder.OnGetUIn16 += FDecoder_OnGetUIn16;
-            FDecoder.OnGetUIn32 += FDecoder_OnGetUIn32;
+            FDecoder.OnGetUInt16 += FDecoder_OnGetUInt16;
+            FDecoder.OnGetUInt32 += FDecoder_OnGetUInt32;
             FDecoder.OnGetUInt64 += FDecoder_OnGetUInt64;
             FDecoder.OnGetSByte += FDecoder_OnGetSByte;
             FDecoder.OnGetInt16 += FDecoder_OnGetInt16;
@@ -177,8 +177,8 @@ namespace RfCommServer
             OnStringReceived = null;
 
             OnGetByte = null;
-            OnGetUIn16 = null;
-            OnGetUIn32 = null;
+            OnGetUInt16 = null;
+            OnGetUInt32 = null;
             OnGetUInt64 = null;
             OnGetSByte = null;
             OnGetInt16 = null;
@@ -275,8 +275,8 @@ namespace RfCommServer
 
         #region Get events.
         public event DataEvent OnGetByte;
-        public event DataEvent OnGetUIn16;
-        public event DataEvent OnGetUIn32;
+        public event DataEvent OnGetUInt16;
+        public event DataEvent OnGetUInt32;
         public event DataEvent OnGetUInt64;
         public event DataEvent OnGetSByte;
         public event DataEvent OnGetInt16;

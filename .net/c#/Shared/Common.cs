@@ -79,6 +79,10 @@ namespace RfCommClientServer
         public const Byte CMD_ERROR_CODE = CMD_FLAG_ERROR | CMD_ERROR;
         #endregion
 
+        #region Service's UUID
+        public static Guid ServiceUuid = new Guid("{CA80C97C-06B3-4E65-9CEE-65BB0B11BC92}");
+        #endregion
+
         #region Command checkers
         public static Boolean IsCmdSend(Byte Cmd)
         {
@@ -281,14 +285,14 @@ namespace RfCommClientServer
 
         private void DoGetUInt16()
         {
-            if (OnGetUIn16 != null)
-                OnGetUIn16(this);
+            if (OnGetUInt16 != null)
+                OnGetUInt16(this);
         }
 
         private void DoGetUInt32()
         {
-            if (OnGetUIn32 != null)
-                OnGetUIn32(this);
+            if (OnGetUInt32 != null)
+                OnGetUInt32(this);
         }
 
         private void DoGetUInt64()
@@ -526,8 +530,8 @@ namespace RfCommClientServer
             OnStringReceived = null;
 
             OnGetByte = null;
-            OnGetUIn16 = null;
-            OnGetUIn32 = null;
+            OnGetUInt16 = null;
+            OnGetUInt32 = null;
             OnGetUInt64 = null;
             OnGetSByte = null;
             OnGetInt16 = null;
@@ -571,8 +575,8 @@ namespace RfCommClientServer
         public event StringReceived OnStringReceived;
 
         public event DataEvent OnGetByte;
-        public event DataEvent OnGetUIn16;
-        public event DataEvent OnGetUIn32;
+        public event DataEvent OnGetUInt16;
+        public event DataEvent OnGetUInt32;
         public event DataEvent OnGetUInt64;
         public event DataEvent OnGetSByte;
         public event DataEvent OnGetInt16;
