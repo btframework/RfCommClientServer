@@ -103,7 +103,7 @@ namespace RfCommClientServer
 
     internal static class CommandBuilder
     {
-        public static Byte[] Create(Byte Data, Boolean Signed)
+        public static Byte[] CreateByte(Byte Data, Boolean Signed)
         {
             Byte[] Cmd = new Byte[4];
             Cmd[0] = 0x00;
@@ -116,7 +116,7 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] Create(UInt16 Data, Boolean Signed)
+        public static Byte[] CreateUInt16(UInt16 Data, Boolean Signed)
         {
             Byte[] Cmd = new Byte[5];
             Cmd[0] = 0x00;
@@ -130,7 +130,7 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] Create(UInt32 Data, Boolean Signed)
+        public static Byte[] CreateUInt32(UInt32 Data, Boolean Signed)
         {
             Byte[] Cmd = new Byte[7];
             Cmd[0] = 0x00;
@@ -146,7 +146,7 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] Create(UInt64 Data, Boolean Signed)
+        public static Byte[] CreateUInt64(UInt64 Data, Boolean Signed)
         {
             UInt32 Hi = (UInt32)(Data >> 32);
             UInt32 Lo = (UInt32)(Data & 0x00000000FFFFFFFF);
@@ -168,7 +168,7 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] Create(Byte[] Data)
+        public static Byte[] CreateArray(Byte[] Data)
         {
             UInt16 Len = (UInt16)(3 + Data.Length);
             Byte[] Cmd = new Byte[Len];
@@ -179,7 +179,7 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] Create(String Data)
+        public static Byte[] CreateString(String Data)
         {
             Byte[] Str = Encoding.UTF8.GetBytes(Data);
             UInt16 Len = (UInt16)(3 + Str.Length);
@@ -191,7 +191,7 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] Create(Int32 Error)
+        public static Byte[] CreateError(Int32 Error)
         {
             Byte[] Cmd = new Byte[7];
             Cmd[0] = 0x00;
@@ -204,7 +204,7 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] Create(Byte Cmd)
+        public static Byte[] CreateGet(Byte Cmd)
         {
             Byte[] Data = new Byte[3];
             Data[0] = 0x00;

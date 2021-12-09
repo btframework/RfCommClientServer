@@ -12,121 +12,121 @@ namespace RfCommServer
         private CommandDecoder FDecoder;
 
         #region Data decoder events.
-        private void FDecoder_OnGetArray(Object Sender)
+        private void GetArray(Object Sender)
         {
             if (OnGetArray != null)
                 OnGetArray(this);
         }
 
-        private void FDecoder_OnGetInt64(Object Sender)
+        private void GetInt64(Object Sender)
         {
             if (OnGetInt64 != null)
                 OnGetInt64(this);
         }
 
-        private void FDecoder_OnGetInt32(Object Sender)
+        private void GetInt32(Object Sender)
         {
             if (OnGetInt32 != null)
                 OnGetInt32(this);
         }
 
-        private void FDecoder_OnGetInt16(Object Sender)
+        private void GetInt16(Object Sender)
         {
             if (OnGetInt16 != null)
                 OnGetInt16(this);
         }
 
-        private void FDecoder_OnGetSByte(Object Sender)
+        private void GetSByte(Object Sender)
         {
             if (OnGetSByte != null)
                 OnGetSByte(this);
         }
 
-        private void FDecoder_OnGetUInt64(Object Sender)
+        private void GetUInt64(Object Sender)
         {
             if (OnGetUInt64 != null)
                 OnGetUInt64(this);
         }
 
-        private void FDecoder_OnGetUInt32(Object Sender)
+        private void GetUInt32(Object Sender)
         {
             if (OnGetUInt32 != null)
                 OnGetUInt32(this);
         }
 
-        private void FDecoder_OnGetUInt16(Object Sender)
+        private void GetUInt16(Object Sender)
         {
             if (OnGetUInt16 != null)
                 OnGetUInt16(this);
         }
 
-        private void FDecoder_OnGetByte(Object Sender)
+        private void GetByte(Object Sender)
         {
             if (OnGetByte != null)
                 OnGetByte(this);
         }
 
-        private void FDecoder_OnGetString(Object Sender)
+        private void GetString(Object Sender)
         {
             if (OnGetString != null)
                 OnGetString(this);
         }
 
-        private void FDecoder_OnArrayReceived(Object Sender, Byte[] Data)
+        private void ArrayReceived(Object Sender, Byte[] Data)
         {
             if (OnArrayReceived != null)
                 OnArrayReceived(this, Data);
         }
 
-        private void FDecoder_OnInt64Received(Object Sender, Int64 Data)
+        private void Int64Received(Object Sender, Int64 Data)
         {
             if (OnInt64Received != null)
                 OnInt64Received(this, Data);
         }
 
-        private void FDecoder_OnInt32Received(Object Sender, Int32 Data)
+        private void Int32Received(Object Sender, Int32 Data)
         {
             if (OnInt32Received != null)
                 OnInt32Received(this, Data);
         }
 
-        private void FDecoder_OnInt16Received(Object Sender, Int16 Data)
+        private void Int16Received(Object Sender, Int16 Data)
         {
             if (OnInt16Received != null)
                 OnInt16Received(this, Data);
         }
 
-        private void FDecoder_OnSByteReceived(Object Sender, SByte Data)
+        private void SByteReceived(Object Sender, SByte Data)
         {
             if (OnSByteReceived != null)
                 OnSByteReceived(this, Data);
         }
 
-        private void FDecoder_OnUInt64Received(Object Sender, UInt64 Data)
+        private void UInt64Received(Object Sender, UInt64 Data)
         {
             if (OnUInt64Received != null)
                 OnUInt64Received(this, Data);
         }
 
-        private void FDecoder_OnUInt32Received(Object Sender, UInt32 Data)
+        private void UInt32Received(Object Sender, UInt32 Data)
         {
             if (OnUInt32Received != null)
                 OnUInt32Received(this, Data);
         }
 
-        private void FDecoder_OnUInt16Received(Object Sender, UInt16 Data)
+        private void UInt16Received(Object Sender, UInt16 Data)
         {
             if (OnUInt16Received != null)
                 OnUInt16Received(this, Data);
         }
 
-        private void FDecoder_OnByteReceived(Object Sender, Byte Data)
+        private void ByteReceived(Object Sender, Byte Data)
         {
             if (OnByteReceived != null)
                 OnByteReceived(this, Data);
         }
 
-        private void FDecoder_OnStringReceived(Object Sender, String Data)
+        private void StringReceived(Object Sender, String Data)
         {
             if (OnStringReceived != null)
                 OnStringReceived(this, Data);
@@ -143,27 +143,27 @@ namespace RfCommServer
         {
             FDecoder = new CommandDecoder();
 
-            FDecoder.OnByteReceived += FDecoder_OnByteReceived;
-            FDecoder.OnUInt16Received += FDecoder_OnUInt16Received;
-            FDecoder.OnUInt32Received += FDecoder_OnUInt32Received;
-            FDecoder.OnUInt64Received += FDecoder_OnUInt64Received;
-            FDecoder.OnSByteReceived += FDecoder_OnSByteReceived;
-            FDecoder.OnInt16Received += FDecoder_OnInt16Received;
-            FDecoder.OnInt32Received += FDecoder_OnInt32Received;
-            FDecoder.OnInt64Received += FDecoder_OnInt64Received;
-            FDecoder.OnArrayReceived += FDecoder_OnArrayReceived;
-            FDecoder.OnStringReceived += FDecoder_OnStringReceived;
+            FDecoder.OnByteReceived += ByteReceived;
+            FDecoder.OnUInt16Received += UInt16Received;
+            FDecoder.OnUInt32Received += UInt32Received;
+            FDecoder.OnUInt64Received += UInt64Received;
+            FDecoder.OnSByteReceived += SByteReceived;
+            FDecoder.OnInt16Received += Int16Received;
+            FDecoder.OnInt32Received += Int32Received;
+            FDecoder.OnInt64Received += Int64Received;
+            FDecoder.OnArrayReceived += ArrayReceived;
+            FDecoder.OnStringReceived += StringReceived;
 
-            FDecoder.OnGetByte += FDecoder_OnGetByte;
-            FDecoder.OnGetUInt16 += FDecoder_OnGetUInt16;
-            FDecoder.OnGetUInt32 += FDecoder_OnGetUInt32;
-            FDecoder.OnGetUInt64 += FDecoder_OnGetUInt64;
-            FDecoder.OnGetSByte += FDecoder_OnGetSByte;
-            FDecoder.OnGetInt16 += FDecoder_OnGetInt16;
-            FDecoder.OnGetInt32 += FDecoder_OnGetInt32;
-            FDecoder.OnGetInt64 += FDecoder_OnGetInt64;
-            FDecoder.OnGetArray += FDecoder_OnGetArray;
-            FDecoder.OnGetString += FDecoder_OnGetString;
+            FDecoder.OnGetByte += GetByte;
+            FDecoder.OnGetUInt16 += GetUInt16;
+            FDecoder.OnGetUInt32 += GetUInt32;
+            FDecoder.OnGetUInt64 += GetUInt64;
+            FDecoder.OnGetSByte += GetSByte;
+            FDecoder.OnGetInt16 += GetInt16;
+            FDecoder.OnGetInt32 += GetInt32;
+            FDecoder.OnGetInt64 += GetInt64;
+            FDecoder.OnGetArray += GetArray;
+            FDecoder.OnGetString += GetString;
 
             OnByteReceived = null;
             OnUInt16Received = null;
@@ -190,71 +190,71 @@ namespace RfCommServer
 
         #region Write data
         #region Unsigned
-        public Int32 WriteData(Byte Data)
+        public Int32 WriteByte(Byte Data)
         {
-            return Write(CommandBuilder.Create(Data, false));
+            return Write(CommandBuilder.CreateByte(Data, false));
         }
 
-        public Int32 WriteData(UInt16 Data)
+        public Int32 WriteUInt16(UInt16 Data)
         {
-            return Write(CommandBuilder.Create(Data, false));
+            return Write(CommandBuilder.CreateUInt16(Data, false));
         }
 
-        public Int32 WriteData(UInt32 Data)
+        public Int32 WriteUInt32(UInt32 Data)
         {
-            return Write(CommandBuilder.Create(Data, false));
+            return Write(CommandBuilder.CreateUInt32(Data, false));
         }
 
-        public Int32 WriteData(UInt64 Data)
+        public Int32 WriteUInt64(UInt64 Data)
         {
-            return Write(CommandBuilder.Create(Data, false));
+            return Write(CommandBuilder.CreateUInt64(Data, false));
         }
         #endregion
 
         #region Signed
-        public Int32 WriteData(SByte Data)
+        public Int32 WriteSByte(SByte Data)
         {
-            return Write(CommandBuilder.Create((Byte)Data, true));
+            return Write(CommandBuilder.CreateByte((Byte)Data, true));
         }
 
-        public Int32 WriteData(Int16 Data)
+        public Int32 WriteInt16(Int16 Data)
         {
-            return Write(CommandBuilder.Create((UInt16)Data, true));
+            return Write(CommandBuilder.CreateUInt16((UInt16)Data, true));
         }
 
-        public Int32 WriteData(Int32 Data)
+        public Int32 WriteInt32(Int32 Data)
         {
-            return Write(CommandBuilder.Create((UInt32)Data, true));
+            return Write(CommandBuilder.CreateUInt32((UInt32)Data, true));
         }
 
-        public Int32 WriteData(Int64 Data)
+        public Int32 WriteInt64(Int64 Data)
         {
-            return Write(CommandBuilder.Create((UInt64)Data, true));
+            return Write(CommandBuilder.CreateUInt64((UInt64)Data, true));
         }
         #endregion
 
         #region Array
-        public Int32 WriteData(Byte[] Data)
+        public Int32 WriteArray(Byte[] Data)
         {
             if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
                 return wclErrors.WCL_E_INVALID_ARGUMENT;
 
-            return Write(CommandBuilder.Create(Data));
+            return Write(CommandBuilder.CreateArray(Data));
         }
 
-        public Int32 WriteData(String Data)
+        public Int32 WriteString(String Data)
         {
             if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
                 return wclErrors.WCL_E_INVALID_ARGUMENT;
 
-            return Write(CommandBuilder.Create(Data));
+            return Write(CommandBuilder.CreateString(Data));
         }
         #endregion
 
         #region Send error
-        public Int32 SendError(Int32 Error)
+        public Int32 WriteError(Int32 Error)
         {
-            return Write(CommandBuilder.Create(Error));
+            return Write(CommandBuilder.CreateError(Error));
         }
         #endregion
         #endregion

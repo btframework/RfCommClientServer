@@ -42,27 +42,27 @@
         Trace("Creating data processor")
         Dim Proc As ServerDataProcessor = New ServerDataProcessor(Connection)
 
-        AddHandler Proc.OnByteReceived, AddressOf Proc_OnByteReceived
-        AddHandler Proc.OnUInt16Received, AddressOf Proc_OnUInt16Received
-        AddHandler Proc.OnUInt32Received, AddressOf Proc_OnUInt32Received
-        AddHandler Proc.OnUInt64Received, AddressOf Proc_OnUInt64Received
-        AddHandler Proc.OnSByteReceived, AddressOf Proc_OnSByteReceived
-        AddHandler Proc.OnInt16Received, AddressOf Proc_OnInt16Received
-        AddHandler Proc.OnInt32Received, AddressOf Proc_OnInt32Received
-        AddHandler Proc.OnInt64Received, AddressOf Proc_OnInt64Received
-        AddHandler Proc.OnArrayReceived, AddressOf Proc_OnArrayReceived
-        AddHandler Proc.OnStringReceived, AddressOf Proc_OnStringReceived
+        AddHandler Proc.OnByteReceived, AddressOf ByteReceived
+        AddHandler Proc.OnUInt16Received, AddressOf UInt16Received
+        AddHandler Proc.OnUInt32Received, AddressOf UInt32Received
+        AddHandler Proc.OnUInt64Received, AddressOf UInt64Received
+        AddHandler Proc.OnSByteReceived, AddressOf SByteReceived
+        AddHandler Proc.OnInt16Received, AddressOf Int16Received
+        AddHandler Proc.OnInt32Received, AddressOf Int32Received
+        AddHandler Proc.OnInt64Received, AddressOf Int64Received
+        AddHandler Proc.OnArrayReceived, AddressOf ArrayReceived
+        AddHandler Proc.OnStringReceived, AddressOf StringReceived
 
-        AddHandler Proc.OnGetByte, AddressOf Proc_OnGetByte
-        AddHandler Proc.OnGetUInt16, AddressOf Proc_OnGetUInt16
-        AddHandler Proc.OnGetUInt32, AddressOf Proc_OnGetUInt32
-        AddHandler Proc.OnGetUInt64, AddressOf Proc_OnGetUInt64
-        AddHandler Proc.OnGetSByte, AddressOf Proc_OnGetSByte
-        AddHandler Proc.OnGetInt16, AddressOf Proc_OnGetInt16
-        AddHandler Proc.OnGetInt32, AddressOf Proc_OnGetInt32
-        AddHandler Proc.OnGetInt64, AddressOf Proc_OnGetInt64
-        AddHandler Proc.OnGetArray, AddressOf Proc_OnGetArray
-        AddHandler Proc.OnGetString, AddressOf Proc_OnGetString
+        AddHandler Proc.OnGetByte, AddressOf GetByte
+        AddHandler Proc.OnGetUInt16, AddressOf GetUInt16
+        AddHandler Proc.OnGetUInt32, AddressOf GetUInt32
+        AddHandler Proc.OnGetUInt64, AddressOf GetUInt64
+        AddHandler Proc.OnGetSByte, AddressOf GetSByte
+        AddHandler Proc.OnGetInt16, AddressOf GetInt16
+        AddHandler Proc.OnGetInt32, AddressOf GetInt32
+        AddHandler Proc.OnGetInt64, AddressOf GetInt64
+        AddHandler Proc.OnGetArray, AddressOf GetArray
+        AddHandler Proc.OnGetString, AddressOf GetString
     End Sub
 
     Private Sub FServer_OnConnect(Sender As Object, Client As wclRfCommServerClientConnection, [Error] As Int32)
@@ -76,96 +76,96 @@
 
 #Region "Data processor events."
 #Region "Data received."
-    Private Sub Proc_OnByteReceived(Sender As Object, Data As Byte)
+    Private Sub ByteReceived(Sender As Object, Data As Byte)
         Trace("Byte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnUInt16Received(Sender As Object, Data As UInt16)
+    Private Sub UInt16Received(Sender As Object, Data As UInt16)
         Trace("UInt16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnUInt32Received(Sender As Object, Data As UInt32)
+    Private Sub UInt32Received(Sender As Object, Data As UInt32)
         Trace("UInt32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnUInt64Received(Sender As Object, Data As UInt64)
+    Private Sub UInt64Received(Sender As Object, Data As UInt64)
         Trace("UInt64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnSByteReceived(Sender As Object, Data As SByte)
+    Private Sub SByteReceived(Sender As Object, Data As SByte)
         Trace("SByte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnInt16Received(Sender As Object, Data As Int16)
+    Private Sub Int16Received(Sender As Object, Data As Int16)
         Trace("Int16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnInt32Received(Sender As Object, Data As Int32)
+    Private Sub Int32Received(Sender As Object, Data As Int32)
         Trace("Int32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnInt64Received(Sender As Object, Data As Int64)
+    Private Sub Int64Received(Sender As Object, Data As Int64)
         Trace("Int64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnArrayReceived(Sender As Object, Data As Byte())
+    Private Sub ArrayReceived(Sender As Object, Data As Byte())
         Trace("Array received: " + Data.Length.ToString())
         Dim Hex As String = BitConverter.ToString(Data)
         Hex = Hex.Replace("-", "")
         lbLog.Items.Add(Hex)
     End Sub
 
-    Private Sub Proc_OnStringReceived(Sender As Object, Data As String)
+    Private Sub StringReceived(Sender As Object, Data As String)
         Trace("String received: " + Data)
     End Sub
 #End Region
 
 #Region "Get data."
-    Private Sub Proc_OnGetByte(Sender As Object)
-        CType(Sender, ServerDataProcessor).WriteData(CByte(&HF5))
+    Private Sub GetByte(Sender As Object)
+        CType(Sender, ServerDataProcessor).WriteByte(&HF5)
     End Sub
 
-    Private Sub Proc_OnGetUInt16(Sender As Object)
-        CType(Sender, ServerDataProcessor).WriteData(CUShort(&HF551))
+    Private Sub GetUInt16(Sender As Object)
+        CType(Sender, ServerDataProcessor).WriteUInt16(&HF551)
     End Sub
 
-    Private Sub Proc_OnGetUInt32(Sender As Object)
-        CType(Sender, ServerDataProcessor).WriteData(CUInt(&HF5515253))
+    Private Sub GetUInt32(Sender As Object)
+        CType(Sender, ServerDataProcessor).WriteUInt32(&HF5515253)
     End Sub
 
-    Private Sub Proc_OnGetUInt64(Sender As Object)
-        CType(Sender, ServerDataProcessor).WriteData(CULng(&HF551525354555657))
+    Private Sub GetUInt64(Sender As Object)
+        CType(Sender, ServerDataProcessor).WriteUInt64(&HF551525354555657)
     End Sub
 
-    Private Sub Proc_OnGetSByte(Sender As Object)
-        CType(Sender, ServerDataProcessor).WriteData(CSByte(&HF5))
+    Private Sub GetSByte(Sender As Object)
+        CType(Sender, ServerDataProcessor).WriteSByte(&HF5)
     End Sub
 
-    Private Sub Proc_OnGetInt16(Sender As Object)
-        CType(Sender, ServerDataProcessor).WriteData(CShort(&HF551))
+    Private Sub GetInt16(Sender As Object)
+        CType(Sender, ServerDataProcessor).WriteInt16(&HF551)
     End Sub
 
-    Private Sub Proc_OnGetInt32(Sender As Object)
-        CType(Sender, ServerDataProcessor).WriteData(CInt(&HF5515253))
+    Private Sub GetInt32(Sender As Object)
+        CType(Sender, ServerDataProcessor).WriteInt32(&HF5515253)
     End Sub
 
-    Private Sub Proc_OnGetInt64(Sender As Object)
-        CType(Sender, ServerDataProcessor).WriteData(CLng(&HF551525354555657))
+    Private Sub GetInt64(Sender As Object)
+        CType(Sender, ServerDataProcessor).WriteInt64(&HF551525354555657)
     End Sub
 
-    Private Sub Proc_OnGetArray(Sender As Object)
+    Private Sub GetArray(Sender As Object)
         Dim Arr As Byte() = New Byte(511) {}
         For i As UInt16 = 0 To 511
             Arr(i) = wclHelpers.LoByte(i)
         Next
-        Dim Res As Int32 = CType(Sender, ServerDataProcessor).WriteData(Arr)
+        Dim Res As Int32 = CType(Sender, ServerDataProcessor).WriteArray(Arr)
         If Res <> wclErrors.WCL_E_SUCCESS Then
             Trace("Write failed", Res)
         End If
     End Sub
 
-    Private Sub Proc_OnGetString(Sender As Object)
-        CType(Sender, ServerDataProcessor).WriteData("Answer from server")
+    Private Sub GetString(Sender As Object)
+        CType(Sender, ServerDataProcessor).WriteString("Answer from server")
     End Sub
 #End Region
 #End Region

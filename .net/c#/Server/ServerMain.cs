@@ -61,27 +61,27 @@ namespace RfCommServer
             Trace("Creating data processor");
             ServerDataProcessor Proc = new ServerDataProcessor(Connection);
 
-            Proc.OnByteReceived += Proc_OnByteReceived;
-            Proc.OnUInt16Received += Proc_OnUInt16Received;
-            Proc.OnUInt32Received += Proc_OnUInt32Received;
-            Proc.OnUInt64Received += Proc_OnUInt64Received;
-            Proc.OnSByteReceived += Proc_OnSByteReceived;
-            Proc.OnInt16Received += Proc_OnInt16Received;
-            Proc.OnInt32Received += Proc_OnInt32Received;
-            Proc.OnInt64Received += Proc_OnInt64Received;
-            Proc.OnArrayReceived += Proc_OnArrayReceived;
-            Proc.OnStringReceived += Proc_OnStringReceived;
+            Proc.OnByteReceived += ByteReceived;
+            Proc.OnUInt16Received += UInt16Received;
+            Proc.OnUInt32Received += UInt32Received;
+            Proc.OnUInt64Received += UInt64Received;
+            Proc.OnSByteReceived += SByteReceived;
+            Proc.OnInt16Received += Int16Received;
+            Proc.OnInt32Received += Int32Received;
+            Proc.OnInt64Received += Int64Received;
+            Proc.OnArrayReceived += ArrayReceived;
+            Proc.OnStringReceived += StringReceived;
 
-            Proc.OnGetByte += Proc_OnGetByte;
-            Proc.OnGetUInt16 += Proc_OnGetUInt16;
-            Proc.OnGetUInt32 += Proc_OnGetUInt32;
-            Proc.OnGetUInt64 += Proc_OnGetUInt64;
-            Proc.OnGetSByte += Proc_OnGetSByte;
-            Proc.OnGetInt16 += Proc_OnGetInt16;
-            Proc.OnGetInt32 += Proc_OnGetInt32;
-            Proc.OnGetInt64 += Proc_OnGetInt64;
-            Proc.OnGetArray += Proc_OnGetArray;
-            Proc.OnGetString += Proc_OnGetString;
+            Proc.OnGetByte += GetByte;
+            Proc.OnGetUInt16 += GetUInt16;
+            Proc.OnGetUInt32 += GetUInt32;
+            Proc.OnGetUInt64 += GetUInt64;
+            Proc.OnGetSByte += GetSByte;
+            Proc.OnGetInt16 += GetInt16;
+            Proc.OnGetInt32 += GetInt32;
+            Proc.OnGetInt64 += GetInt64;
+            Proc.OnGetArray += GetArray;
+            Proc.OnGetString += GetString;
         }
 
         private void FServer_OnConnect(Object Sender, wclRfCommServerClientConnection Client, Int32 Error)
@@ -97,47 +97,47 @@ namespace RfCommServer
 
         #region Data processor events.
         #region Data received.
-        private void Proc_OnByteReceived(Object Sender, Byte Data)
+        private void ByteReceived(Object Sender, Byte Data)
         {
             Trace("Byte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")");
         }
 
-        private void Proc_OnUInt16Received(Object Sender, UInt16 Data)
+        private void UInt16Received(Object Sender, UInt16 Data)
         {
             Trace("UInt16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")");
         }
 
-        private void Proc_OnUInt32Received(Object Sender, UInt32 Data)
+        private void UInt32Received(Object Sender, UInt32 Data)
         {
             Trace("UInt32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")");
         }
 
-        private void Proc_OnUInt64Received(Object Sender, UInt64 Data)
+        private void UInt64Received(Object Sender, UInt64 Data)
         {
             Trace("UInt64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")");
         }
 
-        private void Proc_OnSByteReceived(Object Sender, SByte Data)
+        private void SByteReceived(Object Sender, SByte Data)
         {
             Trace("SByte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")");
         }
 
-        private void Proc_OnInt16Received(Object Sender, Int16 Data)
+        private void Int16Received(Object Sender, Int16 Data)
         {
             Trace("Int16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")");
         }
 
-        private void Proc_OnInt32Received(Object Sender, Int32 Data)
+        private void Int32Received(Object Sender, Int32 Data)
         {
             Trace("Int32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")");
         }
 
-        private void Proc_OnInt64Received(Object Sender, Int64 Data)
+        private void Int64Received(Object Sender, Int64 Data)
         {
             Trace("Int64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")");
         }
 
-        private void Proc_OnArrayReceived(Object Sender, Byte[] Data)
+        private void ArrayReceived(Object Sender, Byte[] Data)
         {
             Trace("Array received: " + Data.Length.ToString());
             String Hex = BitConverter.ToString(Data);
@@ -145,66 +145,66 @@ namespace RfCommServer
             lbLog.Items.Add(Hex);
         }
 
-        private void Proc_OnStringReceived(Object Sender, String Data)
+        private void StringReceived(Object Sender, String Data)
         {
             Trace("String received: " + Data);
         }
         #endregion
 
         #region Get data.
-        private void Proc_OnGetByte(Object Sender)
+        private void GetByte(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((Byte)0xF5);
+            ((ServerDataProcessor)Sender).WriteByte(0xF5);
         }
 
-        private void Proc_OnGetUInt16(Object Sender)
+        private void GetUInt16(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((UInt16)0xF551);
+            ((ServerDataProcessor)Sender).WriteUInt16(0xF551);
         }
 
-        private void Proc_OnGetUInt32(Object Sender)
+        private void GetUInt32(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((UInt32)0xF5515253);
+            ((ServerDataProcessor)Sender).WriteUInt32(0xF5515253);
         }
 
-        private void Proc_OnGetUInt64(Object Sender)
+        private void GetUInt64(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData((UInt64)0xF551525354555657);
+            ((ServerDataProcessor)Sender).WriteUInt64(0xF551525354555657);
         }
 
-        private void Proc_OnGetSByte(Object Sender)
+        private void GetSByte(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData(unchecked((SByte)0xF5));
+            ((ServerDataProcessor)Sender).WriteSByte(unchecked((SByte)0xF5));
         }
 
-        private void Proc_OnGetInt16(Object Sender)
+        private void GetInt16(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData(unchecked((Int16)0xF551));
+            ((ServerDataProcessor)Sender).WriteInt16(unchecked((Int16)0xF551));
         }
 
-        private void Proc_OnGetInt32(Object Sender)
+        private void GetInt32(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData(unchecked((Int32)0xF5515253));
+            ((ServerDataProcessor)Sender).WriteInt32(unchecked((Int32)0xF5515253));
         }
 
-        private void Proc_OnGetInt64(Object Sender)
+        private void GetInt64(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData(unchecked((Int64)0xF551525354555657));
+            ((ServerDataProcessor)Sender).WriteInt64(unchecked((Int64)0xF551525354555657));
         }
 
-        private void Proc_OnGetArray(Object Sender)
+        private void GetArray(Object Sender)
         {
             Byte[] Arr = new Byte[512];
             for (UInt16 i = 0; i < 512; i++)
                 Arr[i] = wclHelpers.LoByte(i);
-            Int32 Res = ((ServerDataProcessor)Sender).WriteData(Arr);
+            Int32 Res = ((ServerDataProcessor)Sender).WriteArray(Arr);
             if (Res != wclErrors.WCL_E_SUCCESS)
                 Trace("Write failed", Res);
         }
 
-        private void Proc_OnGetString(Object Sender)
+        private void GetString(Object Sender)
         {
-            ((ServerDataProcessor)Sender).WriteData("Answer from server");
+            ((ServerDataProcessor)Sender).WriteString("Answer from server");
         }
         #endregion
         #endregion

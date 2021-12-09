@@ -90,7 +90,7 @@ Friend Module Commands
 #End Region
 End Module
 Friend Module CommandBuilder
-    Public Function Create(Data As Byte, Signed As Boolean) As Byte()
+    Public Function CreateByte(Data As Byte, Signed As Boolean) As Byte()
         Dim Cmd As Byte() = New Byte(3) {}
         Cmd(0) = &H0
         Cmd(1) = &H4
@@ -103,7 +103,7 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function Create(Data As UInt16, Signed As Boolean) As Byte()
+    Public Function CreateUInt16(Data As UInt16, Signed As Boolean) As Byte()
         Dim Cmd As Byte() = New Byte(4) {}
         Cmd(0) = &H0
         Cmd(1) = &H5
@@ -117,7 +117,7 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function Create(Data As UInt32, Signed As Boolean) As Byte()
+    Public Function CreateUInt32(Data As UInt32, Signed As Boolean) As Byte()
         Dim Cmd As Byte() = New Byte(6) {}
         Cmd(0) = &H0
         Cmd(1) = &H7
@@ -133,7 +133,7 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function Create(Data As UInt64, Signed As Boolean) As Byte()
+    Public Function CreateUInt64(Data As UInt64, Signed As Boolean) As Byte()
         Dim Hi As UInt32 = CUInt(Data >> 32)
         Dim Lo As UInt32 = CUInt(Data And &HFFFFFFFFUI)
         Dim Cmd As Byte() = New Byte(10) {}
@@ -155,7 +155,7 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function Create(Data As Byte()) As Byte()
+    Public Function CreateArray(Data As Byte()) As Byte()
         Dim Len As UInt16 = CUShort(3 + Data.Length)
         Dim Cmd As Byte() = New Byte(Len - 1) {}
         Cmd(0) = wclHelpers.HiByte(Len)
@@ -165,7 +165,7 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function Create(Data As String) As Byte()
+    Public Function CreateString(Data As String) As Byte()
         Dim Str As Byte() = Text.Encoding.UTF8.GetBytes(Data)
         Dim Len As UInt16 = CUShort(3 + Str.Length)
         Dim Cmd As Byte() = New Byte(Len - 1) {}
@@ -176,7 +176,7 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function Create([Error] As Int32) As Byte()
+    Public Function CreateError([Error] As Int32) As Byte()
         Dim Cmd As Byte() = New Byte(6) {}
         Cmd(0) = &H0
         Cmd(1) = &H7
@@ -188,7 +188,7 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function Create(Cmd As Byte) As Byte()
+    Public Function CreateGet(Cmd As Byte) As Byte()
         Dim Data As Byte() = New Byte(2) {}
         Data(0) = &H0
         Data(1) = &H3

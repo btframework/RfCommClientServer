@@ -4,67 +4,67 @@
     Private FDecoder As CommandDecoder
 
 #Region "Data decoder events."
-    Private Sub FDecoder_OnArrayReceived(Sender As Object, Data As Byte())
+    Private Sub ArrayReceived(Sender As Object, Data As Byte())
         If OnArrayReceivedEvent IsNot Nothing Then
             RaiseEvent OnArrayReceived(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnStringReceived(Sender As Object, Data As String)
+    Private Sub StringReceived(Sender As Object, Data As String)
         If OnStringReceivedEvent IsNot Nothing Then
             RaiseEvent OnStringReceived(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnInt64Received(Sender As Object, Data As Int64)
+    Private Sub Int64Received(Sender As Object, Data As Int64)
         If OnInt64ReceivedEvent IsNot Nothing Then
             RaiseEvent OnInt64Received(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnInt32Received(Sender As Object, Data As Int32)
+    Private Sub Int32Received(Sender As Object, Data As Int32)
         If OnInt32ReceivedEvent IsNot Nothing Then
             RaiseEvent OnInt32Received(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnInt16Received(Sender As Object, Data As Int16)
+    Private Sub Int16Received(Sender As Object, Data As Int16)
         If OnInt16ReceivedEvent IsNot Nothing Then
             RaiseEvent OnInt16Received(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnSByteReceived(Sender As Object, Data As SByte)
+    Private Sub SByteReceived(Sender As Object, Data As SByte)
         If OnSByteReceivedEvent IsNot Nothing Then
             RaiseEvent OnSByteReceived(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnUInt64Received(Sender As Object, Data As UInt64)
+    Private Sub UInt64Received(Sender As Object, Data As UInt64)
         If OnUInt64ReceivedEvent IsNot Nothing Then
             RaiseEvent OnUInt64Received(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnUInt32Received(Sender As Object, Data As UInt32)
+    Private Sub UInt32Received(Sender As Object, Data As UInt32)
         If OnUInt32ReceivedEvent IsNot Nothing Then
             RaiseEvent OnUInt32Received(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnUInt16Received(Sender As Object, Data As UInt16)
+    Private Sub UInt16Received(Sender As Object, Data As UInt16)
         If OnUInt16ReceivedEvent IsNot Nothing Then
             RaiseEvent OnUInt16Received(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnByteReceived(Sender As Object, Data As Byte)
+    Private Sub ByteReceived(Sender As Object, Data As Byte)
         If OnByteReceivedEvent IsNot Nothing Then
             RaiseEvent OnByteReceived(Me, Data)
         End If
     End Sub
 
-    Private Sub FDecoder_OnError(Sender As Object, [Error] As Int32)
+    Private Sub ErrorReceived(Sender As Object, [Error] As Int32)
         If OnErrorEvent IsNot Nothing Then
             RaiseEvent OnError(Me, [Error])
         End If
@@ -79,18 +79,18 @@
         MyBase.New(Connection)
 
         FDecoder = New CommandDecoder()
-        AddHandler FDecoder.OnByteReceived, AddressOf FDecoder_OnByteReceived
-        AddHandler FDecoder.OnUInt16Received, AddressOf FDecoder_OnUInt16Received
-        AddHandler FDecoder.OnUInt32Received, AddressOf FDecoder_OnUInt32Received
-        AddHandler FDecoder.OnUInt64Received, AddressOf FDecoder_OnUInt64Received
-        AddHandler FDecoder.OnSByteReceived, AddressOf FDecoder_OnSByteReceived
-        AddHandler FDecoder.OnInt16Received, AddressOf FDecoder_OnInt16Received
-        AddHandler FDecoder.OnInt32Received, AddressOf FDecoder_OnInt32Received
-        AddHandler FDecoder.OnInt64Received, AddressOf FDecoder_OnInt64Received
-        AddHandler FDecoder.OnArrayReceived, AddressOf FDecoder_OnArrayReceived
-        AddHandler FDecoder.OnStringReceived, AddressOf FDecoder_OnStringReceived
+        AddHandler FDecoder.OnByteReceived, AddressOf ByteReceived
+        AddHandler FDecoder.OnUInt16Received, AddressOf UInt16Received
+        AddHandler FDecoder.OnUInt32Received, AddressOf UInt32Received
+        AddHandler FDecoder.OnUInt64Received, AddressOf UInt64Received
+        AddHandler FDecoder.OnSByteReceived, AddressOf SByteReceived
+        AddHandler FDecoder.OnInt16Received, AddressOf Int16Received
+        AddHandler FDecoder.OnInt32Received, AddressOf Int32Received
+        AddHandler FDecoder.OnInt64Received, AddressOf Int64Received
+        AddHandler FDecoder.OnArrayReceived, AddressOf ArrayReceived
+        AddHandler FDecoder.OnStringReceived, AddressOf StringReceived
 
-        AddHandler FDecoder.OnError, AddressOf FDecoder_OnError
+        AddHandler FDecoder.OnError, AddressOf ErrorReceived
 
         OnByteReceivedEvent = Nothing
         OnUInt16ReceivedEvent = Nothing
@@ -108,56 +108,56 @@
 
 #Region "Write data"
 #Region "Unsigned"
-    Public Overloads Function WriteData(Data As Byte) As Int32
-        Return Write(CommandBuilder.Create(Data, False))
+    Public Function WriteByte(Data As Byte) As Int32
+        Return Write(CommandBuilder.CreateByte(Data, False))
     End Function
 
-    Public Overloads Function WriteData(Data As UInt16) As Int32
-        Return Write(CommandBuilder.Create(Data, False))
+    Public Function WriteUInt16(Data As UInt16) As Int32
+        Return Write(CommandBuilder.CreateUInt16(Data, False))
     End Function
 
-    Public Overloads Function WriteData(Data As UInt32) As Int32
-        Return Write(CommandBuilder.Create(Data, False))
+    Public Function WriteUInt32(Data As UInt32) As Int32
+        Return Write(CommandBuilder.CreateUInt32(Data, False))
     End Function
 
-    Public Overloads Function WriteData(Data As UInt64) As Int32
-        Return Write(CommandBuilder.Create(Data, False))
+    Public Function WriteUInt64(Data As UInt64) As Int32
+        Return Write(CommandBuilder.CreateUInt64(Data, False))
     End Function
 #End Region
 
 #Region "Signed"
-    Public Overloads Function WriteData(Data As SByte) As Int32
-        Return Write(CommandBuilder.Create(CByte(Data), True))
+    Public Function WriteSByte(Data As SByte) As Int32
+        Return Write(CommandBuilder.CreateByte(CByte(Data), True))
     End Function
 
-    Public Overloads Function WriteData(Data As Int16) As Int32
-        Return Write(CommandBuilder.Create(CUShort(Data), True))
+    Public Function WriteInt16(Data As Int16) As Int32
+        Return Write(CommandBuilder.CreateUInt16(CUShort(Data), True))
     End Function
 
-    Public Overloads Function WriteData(Data As Int32) As Int32
-        Return Write(CommandBuilder.Create(CUInt(Data), True))
+    Public Function WriteInt32(Data As Int32) As Int32
+        Return Write(CommandBuilder.CreateUInt32(CUInt(Data), True))
     End Function
 
-    Public Overloads Function WriteData(Data As Int64) As Int32
-        Return Write(CommandBuilder.Create(CULng(Data), True))
+    Public Function WriteInt64(Data As Int64) As Int32
+        Return Write(CommandBuilder.CreateUInt64(CULng(Data), True))
     End Function
 #End Region
 
 #Region "Array"
-    Public Overloads Function WriteData(Data As Byte()) As Int32
+    Public Function WriteArray(Data As Byte()) As Int32
         If Data Is Nothing Or Data.Length = 0 Or CUInt(Data.Length) > UInt16.MaxValue - 3 Then
             Return wclErrors.WCL_E_INVALID_ARGUMENT
         End If
 
-        Return Write(CommandBuilder.Create(Data))
+        Return Write(CommandBuilder.CreateArray(Data))
     End Function
 
-    Public Overloads Function WriteData(Data As String) As Int32
+    Public Function WriteString(Data As String) As Int32
         If Data Is Nothing Or Data.Length = 0 Or CUInt(Data.Length) > UInt16.MaxValue - 3 Then
             Return wclErrors.WCL_E_INVALID_ARGUMENT
         End If
 
-        Return Write(CommandBuilder.Create(Data))
+        Return Write(CommandBuilder.CreateString(Data))
     End Function
 #End Region
 #End Region
@@ -165,47 +165,47 @@
 #Region "Get data"
 #Region "Sigend"
     Public Function GetSByte() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_SBYTE))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_SBYTE))
     End Function
 
     Public Function GetInt16() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_INT16))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT16))
     End Function
 
     Public Function GetInt32() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_INT32))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT32))
     End Function
 
     Public Function GetInt64() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_INT64))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT64))
     End Function
 #End Region
 
 #Region "Unsigend"
     Public Function GetByte() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_BYTE))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_BYTE))
     End Function
 
     Public Function GetUInt16() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_UINT16))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_UINT16))
     End Function
 
     Public Function GetUInt32() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_UINT32))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_UINT32))
     End Function
 
     Public Function GetUInt64() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_UINT64))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_UINT64))
     End Function
 #End Region
 
 #Region "Array"
     Public Function GetArray() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_ARRAY))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_ARRAY))
     End Function
 
     Public Function GetString() As Int32
-        Return Write(CommandBuilder.Create(Commands.CMD_GET_STRING))
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_STRING))
     End Function
 #End Region
 #End Region

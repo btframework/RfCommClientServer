@@ -65,18 +65,18 @@
         Trace("Creating data processor")
         Dim Proc As ClientDataProcessor = New ClientDataProcessor(Connection)
 
-        AddHandler Proc.OnByteReceived, AddressOf Proc_OnByteReceived
-        AddHandler Proc.OnUInt16Received, AddressOf Proc_OnUInt16Received
-        AddHandler Proc.OnUInt32Received, AddressOf Proc_OnUInt32Received
-        AddHandler Proc.OnUInt64Received, AddressOf Proc_OnUInt64Received
-        AddHandler Proc.OnSByteReceived, AddressOf Proc_OnSByteReceived
-        AddHandler Proc.OnInt16Received, AddressOf Proc_OnInt16Received
-        AddHandler Proc.OnInt32Received, AddressOf Proc_OnInt32Received
-        AddHandler Proc.OnInt64Received, AddressOf Proc_OnInt64Received
-        AddHandler Proc.OnArrayReceived, AddressOf Proc_OnArrayReceived
-        AddHandler Proc.OnStringReceived, AddressOf Proc_OnStringReceived
+        AddHandler Proc.OnByteReceived, AddressOf ByteReceived
+        AddHandler Proc.OnUInt16Received, AddressOf UInt16Received
+        AddHandler Proc.OnUInt32Received, AddressOf UInt32Received
+        AddHandler Proc.OnUInt64Received, AddressOf UInt64Received
+        AddHandler Proc.OnSByteReceived, AddressOf SByteReceived
+        AddHandler Proc.OnInt16Received, AddressOf Int16Received
+        AddHandler Proc.OnInt32Received, AddressOf Int32Received
+        AddHandler Proc.OnInt64Received, AddressOf Int64Received
+        AddHandler Proc.OnArrayReceived, AddressOf ArrayReceived
+        AddHandler Proc.OnStringReceived, AddressOf StringReceived
 
-        AddHandler Proc.OnError, AddressOf Proc_OnError
+        AddHandler Proc.OnError, AddressOf ErrorReceived
     End Sub
 
     Private Sub FClient_OnDestroyProcessor(Sender As Object, Connection As wclClientDataConnection)
@@ -89,52 +89,52 @@
 
 #Region "Data processor events."
 #Region "Data received."
-    Private Sub Proc_OnByteReceived(Sender As Object, Data As Byte)
+    Private Sub ByteReceived(Sender As Object, Data As Byte)
         Trace("Byte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnUInt16Received(Sender As Object, Data As UInt16)
+    Private Sub UInt16Received(Sender As Object, Data As UInt16)
         Trace("UInt16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnUInt32Received(Sender As Object, Data As UInt32)
+    Private Sub UInt32Received(Sender As Object, Data As UInt32)
         Trace("UInt32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnUInt64Received(Sender As Object, Data As UInt64)
+    Private Sub UInt64Received(Sender As Object, Data As UInt64)
         Trace("UInt64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnSByteReceived(Sender As Object, Data As SByte)
+    Private Sub SByteReceived(Sender As Object, Data As SByte)
         Trace("SByte received: " + Data.ToString("X2") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnInt16Received(Sender As Object, Data As Int16)
+    Private Sub Int16Received(Sender As Object, Data As Int16)
         Trace("Int16 received: " + Data.ToString("X4") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnInt32Received(Sender As Object, Data As Int32)
+    Private Sub Int32Received(Sender As Object, Data As Int32)
         Trace("Int32 received: " + Data.ToString("X8") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnInt64Received(Sender As Object, Data As Int64)
+    Private Sub Int64Received(Sender As Object, Data As Int64)
         Trace("Int64 received: " + Data.ToString("X16") + " (" + Data.ToString() + ")")
     End Sub
 
-    Private Sub Proc_OnArrayReceived(Sender As Object, Data As Byte())
+    Private Sub ArrayReceived(Sender As Object, Data As Byte())
         Trace("Array received: " + Data.Length.ToString())
         Dim Hex As String = BitConverter.ToString(Data)
         Hex = Hex.Replace("-", "")
         lbLog.Items.Add(Hex)
     End Sub
 
-    Private Sub Proc_OnStringReceived(Sender As Object, Data As String)
+    Private Sub StringReceived(Sender As Object, Data As String)
         Trace("String received: " + Data)
     End Sub
 #End Region
 
 #Region "Error received"
-    Private Sub Proc_OnError(Sender As Object, [Error] As Int32)
+    Private Sub ErrorReceived(Sender As Object, [Error] As Int32)
         Trace("Error received", [Error])
     End Sub
 #End Region
@@ -241,7 +241,7 @@
         If FClient.Processor Is Nothing Then
             Trace("Data processor not created")
         Else
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData(CByte(&HF1))
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteByte(&HF1)
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
@@ -252,7 +252,7 @@
         If FClient.Processor Is Nothing Then
             Trace("Data processor not created")
         Else
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData(CUShort(&HF112))
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteUInt16(&HF112)
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
@@ -263,7 +263,7 @@
         If FClient.Processor Is Nothing Then
             Trace("Data processor not created")
         Else
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData(CUInt(&HF1121314UI))
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteUInt32(&HF1121314UI)
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
@@ -274,7 +274,7 @@
         If FClient.Processor Is Nothing Then
             Trace("Data processor not created")
         Else
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData(CULng(&HF112131415161718UL))
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteUInt64(&HF112131415161718UL)
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
@@ -285,7 +285,7 @@
         If FClient.Processor Is Nothing Then
             Trace("Data processor not created")
         Else
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData(CSByte(&HF1))
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteSByte(&HF1)
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
@@ -296,7 +296,7 @@
         If FClient.Processor Is Nothing Then
             Trace("Data processor not created")
         Else
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData(CShort(&HF112))
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteInt16(&HF112)
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
@@ -307,7 +307,7 @@
         If FClient.Processor Is Nothing Then
             Trace("Data processor not created")
         Else
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData(CInt(&HF1121314))
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteInt32(&HF1121314)
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
@@ -318,7 +318,7 @@
         If FClient.Processor Is Nothing Then
             Trace("Data processor not created")
         Else
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData(CLng(&HF112131415161718L))
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteInt64(&HF112131415161718L)
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
@@ -333,7 +333,7 @@
             For i As UInt16 = 0 To 511
                 Arr(i) = wclHelpers.LoByte(i)
             Next
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData(Arr)
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteArray(Arr)
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
@@ -344,7 +344,7 @@
         If FClient.Processor Is Nothing Then
             Trace("Data processor not created")
         Else
-            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteData("Request from client")
+            Dim Res As Int32 = CType(FClient.Processor, ClientDataProcessor).WriteString("Request from client")
             If Res <> wclErrors.WCL_E_SUCCESS Then
                 Trace("Write failed", Res)
             End If
