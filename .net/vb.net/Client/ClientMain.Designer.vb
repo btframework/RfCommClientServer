@@ -54,7 +54,7 @@ Partial Class fmClientMain
         '
         'btGetString
         '
-        Me.btGetString.Location = New System.Drawing.Point(336, 255)
+        Me.btGetString.Location = New System.Drawing.Point(350, 250)
         Me.btGetString.Name = "btGetString"
         Me.btGetString.Size = New System.Drawing.Size(75, 23)
         Me.btGetString.TabIndex = 51
@@ -63,7 +63,7 @@ Partial Class fmClientMain
         '
         'btSendString
         '
-        Me.btSendString.Location = New System.Drawing.Point(336, 181)
+        Me.btSendString.Location = New System.Drawing.Point(350, 181)
         Me.btSendString.Name = "btSendString"
         Me.btSendString.Size = New System.Drawing.Size(75, 23)
         Me.btSendString.TabIndex = 50
@@ -72,7 +72,7 @@ Partial Class fmClientMain
         '
         'btGetArray
         '
-        Me.btGetArray.Location = New System.Drawing.Point(336, 226)
+        Me.btGetArray.Location = New System.Drawing.Point(350, 221)
         Me.btGetArray.Name = "btGetArray"
         Me.btGetArray.Size = New System.Drawing.Size(75, 23)
         Me.btGetArray.TabIndex = 49
@@ -81,7 +81,7 @@ Partial Class fmClientMain
         '
         'btGetInt64
         '
-        Me.btGetInt64.Location = New System.Drawing.Point(255, 255)
+        Me.btGetInt64.Location = New System.Drawing.Point(255, 250)
         Me.btGetInt64.Name = "btGetInt64"
         Me.btGetInt64.Size = New System.Drawing.Size(75, 23)
         Me.btGetInt64.TabIndex = 48
@@ -90,7 +90,7 @@ Partial Class fmClientMain
         '
         'btGetInt32
         '
-        Me.btGetInt32.Location = New System.Drawing.Point(174, 255)
+        Me.btGetInt32.Location = New System.Drawing.Point(174, 250)
         Me.btGetInt32.Name = "btGetInt32"
         Me.btGetInt32.Size = New System.Drawing.Size(75, 23)
         Me.btGetInt32.TabIndex = 47
@@ -99,7 +99,7 @@ Partial Class fmClientMain
         '
         'btGetInt16
         '
-        Me.btGetInt16.Location = New System.Drawing.Point(93, 255)
+        Me.btGetInt16.Location = New System.Drawing.Point(93, 250)
         Me.btGetInt16.Name = "btGetInt16"
         Me.btGetInt16.Size = New System.Drawing.Size(75, 23)
         Me.btGetInt16.TabIndex = 46
@@ -108,7 +108,7 @@ Partial Class fmClientMain
         '
         'btGetSByte
         '
-        Me.btGetSByte.Location = New System.Drawing.Point(10, 255)
+        Me.btGetSByte.Location = New System.Drawing.Point(10, 250)
         Me.btGetSByte.Name = "btGetSByte"
         Me.btGetSByte.Size = New System.Drawing.Size(75, 23)
         Me.btGetSByte.TabIndex = 45
@@ -117,7 +117,7 @@ Partial Class fmClientMain
         '
         'btGetUInt64
         '
-        Me.btGetUInt64.Location = New System.Drawing.Point(255, 226)
+        Me.btGetUInt64.Location = New System.Drawing.Point(255, 221)
         Me.btGetUInt64.Name = "btGetUInt64"
         Me.btGetUInt64.Size = New System.Drawing.Size(75, 23)
         Me.btGetUInt64.TabIndex = 44
@@ -126,7 +126,7 @@ Partial Class fmClientMain
         '
         'btGetUInt32
         '
-        Me.btGetUInt32.Location = New System.Drawing.Point(174, 226)
+        Me.btGetUInt32.Location = New System.Drawing.Point(174, 221)
         Me.btGetUInt32.Name = "btGetUInt32"
         Me.btGetUInt32.Size = New System.Drawing.Size(75, 23)
         Me.btGetUInt32.TabIndex = 43
@@ -135,7 +135,7 @@ Partial Class fmClientMain
         '
         'btGetUInt16
         '
-        Me.btGetUInt16.Location = New System.Drawing.Point(93, 226)
+        Me.btGetUInt16.Location = New System.Drawing.Point(93, 221)
         Me.btGetUInt16.Name = "btGetUInt16"
         Me.btGetUInt16.Size = New System.Drawing.Size(75, 23)
         Me.btGetUInt16.TabIndex = 42
@@ -144,7 +144,7 @@ Partial Class fmClientMain
         '
         'btGetByte
         '
-        Me.btGetByte.Location = New System.Drawing.Point(12, 226)
+        Me.btGetByte.Location = New System.Drawing.Point(10, 221)
         Me.btGetByte.Name = "btGetByte"
         Me.btGetByte.Size = New System.Drawing.Size(75, 23)
         Me.btGetByte.TabIndex = 41
@@ -153,7 +153,7 @@ Partial Class fmClientMain
         '
         'btSendArray
         '
-        Me.btSendArray.Location = New System.Drawing.Point(336, 152)
+        Me.btSendArray.Location = New System.Drawing.Point(350, 152)
         Me.btSendArray.Name = "btSendArray"
         Me.btSendArray.Size = New System.Drawing.Size(75, 23)
         Me.btSendArray.TabIndex = 40
@@ -305,7 +305,7 @@ Partial Class fmClientMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(435, 501)
+        Me.ClientSize = New System.Drawing.Size(437, 501)
         Me.Controls.Add(Me.btGetString)
         Me.Controls.Add(Me.btSendString)
         Me.Controls.Add(Me.btGetArray)

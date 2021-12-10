@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{778DCBB6-030C-4B83-A096-8136C566A304}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Client\RfCommClient.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Server\RfCommServer.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RfCommClient">
+        <MSBuild Projects="Client\RfCommClient.dproj"/>
+    </Target>
+    <Target Name="RfCommClient:Clean">
+        <MSBuild Projects="Client\RfCommClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RfCommClient:Make">
+        <MSBuild Projects="Client\RfCommClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RfCommServer">
+        <MSBuild Projects="Server\RfCommServer.dproj"/>
+    </Target>
+    <Target Name="RfCommServer:Clean">
+        <MSBuild Projects="Server\RfCommServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RfCommServer:Make">
+        <MSBuild Projects="Server\RfCommServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RfCommClient;RfCommServer"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RfCommClient:Clean;RfCommServer:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RfCommClient:Make;RfCommServer:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

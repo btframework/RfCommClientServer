@@ -180,49 +180,44 @@
     End Sub
 
 #Region "Write data"
-#Region "Unsigned"
     Public Function WriteByte(Data As Byte) As Int32
-        Return Write(CommandBuilder.CreateByte(Data, False))
+        Return Write(CommandBuilder.Create(Data))
+    End Function
+
+    Public Function WriteSByte(Data As SByte) As Int32
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteUInt16(Data As UInt16) As Int32
-        Return Write(CommandBuilder.CreateUInt16(Data, False))
-    End Function
-
-    Public Function WriteUInt32(Data As UInt32) As Int32
-        Return Write(CommandBuilder.CreateUInt32(Data, False))
-    End Function
-
-    Public Function WriteUInt64(Data As UInt64) As Int32
-        Return Write(CommandBuilder.CreateUInt64(Data, False))
-    End Function
-#End Region
-
-#Region "Signed"
-    Public Function WriteSByte(Data As SByte) As Int32
-        Return Write(CommandBuilder.CreateByte(CByte(Data), True))
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteInt16(Data As Int16) As Int32
-        Return Write(CommandBuilder.CreateUInt16(CUShort(Data), True))
+        Return Write(CommandBuilder.Create(Data))
+    End Function
+
+    Public Function WriteUInt32(Data As UInt32) As Int32
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteInt32(Data As Int32) As Int32
-        Return Write(CommandBuilder.CreateUInt32(CUInt(Data), True))
+        Return Write(CommandBuilder.Create(Data))
+    End Function
+
+    Public Function WriteUInt64(Data As UInt64) As Int32
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteInt64(Data As Int64) As Int32
-        Return Write(CommandBuilder.CreateUInt64(CULng(Data), True))
+        Return Write(CommandBuilder.Create(Data))
     End Function
-#End Region
 
-#Region "Array"
     Public Function WriteArray(Data As Byte()) As Int32
         If Data Is Nothing Or Data.Length = 0 Or CUInt(Data.Length) > UInt16.MaxValue - 3 Then
             Return wclErrors.WCL_E_INVALID_ARGUMENT
         End If
 
-        Return Write(CommandBuilder.CreateArray(Data))
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteString(Data As String) As Int32
@@ -230,15 +225,12 @@
             Return wclErrors.WCL_E_INVALID_ARGUMENT
         End If
 
-        Return Write(CommandBuilder.CreateString(Data))
+        Return Write(CommandBuilder.Create(Data))
     End Function
-#End Region
 
-#Region "Send Error"
     Public Function WriteError([Error] As Int32) As Int32
         Return Write(CommandBuilder.CreateError([Error]))
     End Function
-#End Region
 #End Region
 
 #Region "Events."

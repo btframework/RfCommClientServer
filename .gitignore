@@ -2,6 +2,8 @@
 /**/obj
 /**/build
 /**/lib
+/**/__history
+/**/__recovery
 
 *.suo
 *.~pas

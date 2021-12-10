@@ -126,7 +126,7 @@ namespace RfCommClient
             // 
             // btClear
             // 
-            this.btClear.Location = new System.Drawing.Point(350, 290);
+            this.btClear.Location = new System.Drawing.Point(350, 287);
             this.btClear.Name = "btClear";
             this.btClear.Size = new System.Drawing.Size(75, 23);
             this.btClear.TabIndex = 5;
@@ -216,7 +216,7 @@ namespace RfCommClient
             // 
             // btSendArray
             // 
-            this.btSendArray.Location = new System.Drawing.Point(336, 152);
+            this.btSendArray.Location = new System.Drawing.Point(350, 152);
             this.btSendArray.Name = "btSendArray";
             this.btSendArray.Size = new System.Drawing.Size(75, 23);
             this.btSendArray.TabIndex = 14;
@@ -226,7 +226,7 @@ namespace RfCommClient
             // 
             // btGetByte
             // 
-            this.btGetByte.Location = new System.Drawing.Point(12, 226);
+            this.btGetByte.Location = new System.Drawing.Point(12, 220);
             this.btGetByte.Name = "btGetByte";
             this.btGetByte.Size = new System.Drawing.Size(75, 23);
             this.btGetByte.TabIndex = 15;
@@ -236,7 +236,7 @@ namespace RfCommClient
             // 
             // btGetUInt16
             // 
-            this.btGetUInt16.Location = new System.Drawing.Point(93, 226);
+            this.btGetUInt16.Location = new System.Drawing.Point(93, 220);
             this.btGetUInt16.Name = "btGetUInt16";
             this.btGetUInt16.Size = new System.Drawing.Size(75, 23);
             this.btGetUInt16.TabIndex = 16;
@@ -246,7 +246,7 @@ namespace RfCommClient
             // 
             // btGetUInt32
             // 
-            this.btGetUInt32.Location = new System.Drawing.Point(174, 226);
+            this.btGetUInt32.Location = new System.Drawing.Point(174, 220);
             this.btGetUInt32.Name = "btGetUInt32";
             this.btGetUInt32.Size = new System.Drawing.Size(75, 23);
             this.btGetUInt32.TabIndex = 17;
@@ -256,7 +256,7 @@ namespace RfCommClient
             // 
             // btGetUInt64
             // 
-            this.btGetUInt64.Location = new System.Drawing.Point(255, 226);
+            this.btGetUInt64.Location = new System.Drawing.Point(255, 220);
             this.btGetUInt64.Name = "btGetUInt64";
             this.btGetUInt64.Size = new System.Drawing.Size(75, 23);
             this.btGetUInt64.TabIndex = 18;
@@ -266,7 +266,7 @@ namespace RfCommClient
             // 
             // btGetSByte
             // 
-            this.btGetSByte.Location = new System.Drawing.Point(10, 255);
+            this.btGetSByte.Location = new System.Drawing.Point(12, 249);
             this.btGetSByte.Name = "btGetSByte";
             this.btGetSByte.Size = new System.Drawing.Size(75, 23);
             this.btGetSByte.TabIndex = 19;
@@ -276,7 +276,7 @@ namespace RfCommClient
             // 
             // btGetInt16
             // 
-            this.btGetInt16.Location = new System.Drawing.Point(93, 255);
+            this.btGetInt16.Location = new System.Drawing.Point(93, 249);
             this.btGetInt16.Name = "btGetInt16";
             this.btGetInt16.Size = new System.Drawing.Size(75, 23);
             this.btGetInt16.TabIndex = 20;
@@ -286,7 +286,7 @@ namespace RfCommClient
             // 
             // btGetInt32
             // 
-            this.btGetInt32.Location = new System.Drawing.Point(174, 255);
+            this.btGetInt32.Location = new System.Drawing.Point(174, 249);
             this.btGetInt32.Name = "btGetInt32";
             this.btGetInt32.Size = new System.Drawing.Size(75, 23);
             this.btGetInt32.TabIndex = 21;
@@ -296,7 +296,7 @@ namespace RfCommClient
             // 
             // btGetInt64
             // 
-            this.btGetInt64.Location = new System.Drawing.Point(255, 255);
+            this.btGetInt64.Location = new System.Drawing.Point(255, 249);
             this.btGetInt64.Name = "btGetInt64";
             this.btGetInt64.Size = new System.Drawing.Size(75, 23);
             this.btGetInt64.TabIndex = 22;
@@ -306,7 +306,7 @@ namespace RfCommClient
             // 
             // btGetArray
             // 
-            this.btGetArray.Location = new System.Drawing.Point(336, 226);
+            this.btGetArray.Location = new System.Drawing.Point(350, 220);
             this.btGetArray.Name = "btGetArray";
             this.btGetArray.Size = new System.Drawing.Size(75, 23);
             this.btGetArray.TabIndex = 23;
@@ -316,7 +316,7 @@ namespace RfCommClient
             // 
             // btSendString
             // 
-            this.btSendString.Location = new System.Drawing.Point(336, 181);
+            this.btSendString.Location = new System.Drawing.Point(350, 181);
             this.btSendString.Name = "btSendString";
             this.btSendString.Size = new System.Drawing.Size(75, 23);
             this.btSendString.TabIndex = 24;
@@ -326,7 +326,7 @@ namespace RfCommClient
             // 
             // btGetString
             // 
-            this.btGetString.Location = new System.Drawing.Point(336, 255);
+            this.btGetString.Location = new System.Drawing.Point(350, 249);
             this.btGetString.Name = "btGetString";
             this.btGetString.Size = new System.Drawing.Size(75, 23);
             this.btGetString.TabIndex = 25;
@@ -338,7 +338,7 @@ namespace RfCommClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 501);
+            this.ClientSize = new System.Drawing.Size(437, 501);
             this.Controls.Add(this.btGetString);
             this.Controls.Add(this.btSendString);
             this.Controls.Add(this.btGetArray);

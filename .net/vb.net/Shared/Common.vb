@@ -90,42 +90,49 @@ Friend Module Commands
 #End Region
 End Module
 Friend Module CommandBuilder
-    Public Function CreateByte(Data As Byte, Signed As Boolean) As Byte()
+    Public Function Create(Data As Byte) As Byte()
         Dim Cmd As Byte() = New Byte(3) {}
         Cmd(0) = &H0
         Cmd(1) = &H4
-        If Signed Then
-            Cmd(2) = Commands.CMD_SEND_SBYTE
-        Else
-            Cmd(2) = Commands.CMD_SEND_BYTE
-        End If
+        Cmd(2) = Commands.CMD_SEND_BYTE
         Cmd(3) = Data
         Return Cmd
     End Function
 
-    Public Function CreateUInt16(Data As UInt16, Signed As Boolean) As Byte()
+    Public Function Create(Data As SByte) As Byte()
+        Dim Cmd As Byte() = New Byte(3) {}
+        Cmd(0) = &H0
+        Cmd(1) = &H4
+        Cmd(2) = Commands.CMD_SEND_SBYTE
+        Cmd(3) = Data
+        Return Cmd
+    End Function
+
+    Public Function Create(Data As UInt16) As Byte()
         Dim Cmd As Byte() = New Byte(4) {}
         Cmd(0) = &H0
         Cmd(1) = &H5
-        If Signed Then
-            Cmd(2) = Commands.CMD_SEND_INT16
-        Else
-            Cmd(2) = Commands.CMD_SEND_UINT16
-        End If
+        Cmd(2) = Commands.CMD_SEND_UINT16
         Cmd(3) = wclHelpers.HiByte(Data)
         Cmd(4) = wclHelpers.LoByte(Data)
         Return Cmd
     End Function
 
-    Public Function CreateUInt32(Data As UInt32, Signed As Boolean) As Byte()
+    Public Function Create(Data As Int16) As Byte()
+        Dim Cmd As Byte() = New Byte(4) {}
+        Cmd(0) = &H0
+        Cmd(1) = &H5
+        Cmd(2) = Commands.CMD_SEND_INT16
+        Cmd(3) = wclHelpers.HiByte(Data)
+        Cmd(4) = wclHelpers.LoByte(Data)
+        Return Cmd
+    End Function
+
+    Public Function Create(Data As UInt32) As Byte()
         Dim Cmd As Byte() = New Byte(6) {}
         Cmd(0) = &H0
         Cmd(1) = &H7
-        If Signed Then
-            Cmd(2) = Commands.CMD_SEND_INT32
-        Else
-            Cmd(2) = Commands.CMD_SEND_UINT32
-        End If
+        Cmd(2) = Commands.CMD_SEND_UINT32
         Cmd(3) = wclHelpers.HiByte(wclHelpers.HiWord(Data))
         Cmd(4) = wclHelpers.LoByte(wclHelpers.HiWord(Data))
         Cmd(5) = wclHelpers.HiByte(wclHelpers.LoWord(Data))
@@ -133,17 +140,25 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function CreateUInt64(Data As UInt64, Signed As Boolean) As Byte()
+    Public Function Create(Data As Int32) As Byte()
+        Dim Cmd As Byte() = New Byte(6) {}
+        Cmd(0) = &H0
+        Cmd(1) = &H7
+        Cmd(2) = Commands.CMD_SEND_INT32
+        Cmd(3) = wclHelpers.HiByte(wclHelpers.HiWord(Data))
+        Cmd(4) = wclHelpers.LoByte(wclHelpers.HiWord(Data))
+        Cmd(5) = wclHelpers.HiByte(wclHelpers.LoWord(Data))
+        Cmd(6) = wclHelpers.LoByte(wclHelpers.LoWord(Data))
+        Return Cmd
+    End Function
+
+    Public Function Create(Data As UInt64) As Byte()
         Dim Hi As UInt32 = CUInt(Data >> 32)
         Dim Lo As UInt32 = CUInt(Data And &HFFFFFFFFUI)
         Dim Cmd As Byte() = New Byte(10) {}
         Cmd(0) = &H0
         Cmd(1) = &HB
-        If Signed Then
-            Cmd(2) = Commands.CMD_SEND_INT64
-        Else
-            Cmd(2) = Commands.CMD_SEND_UINT64
-        End If
+        Cmd(2) = Commands.CMD_SEND_UINT64
         Cmd(3) = wclHelpers.HiByte(wclHelpers.HiWord(Hi))
         Cmd(4) = wclHelpers.LoByte(wclHelpers.HiWord(Hi))
         Cmd(5) = wclHelpers.HiByte(wclHelpers.LoWord(Hi))
@@ -155,7 +170,25 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function CreateArray(Data As Byte()) As Byte()
+    Public Function Create(Data As Int64) As Byte()
+        Dim Hi As UInt32 = CUInt(Data >> 32)
+        Dim Lo As UInt32 = CUInt(Data And &HFFFFFFFFUI)
+        Dim Cmd As Byte() = New Byte(10) {}
+        Cmd(0) = &H0
+        Cmd(1) = &HB
+        Cmd(2) = Commands.CMD_SEND_INT64
+        Cmd(3) = wclHelpers.HiByte(wclHelpers.HiWord(Hi))
+        Cmd(4) = wclHelpers.LoByte(wclHelpers.HiWord(Hi))
+        Cmd(5) = wclHelpers.HiByte(wclHelpers.LoWord(Hi))
+        Cmd(6) = wclHelpers.LoByte(wclHelpers.LoWord(Hi))
+        Cmd(7) = wclHelpers.HiByte(wclHelpers.HiWord(Lo))
+        Cmd(8) = wclHelpers.LoByte(wclHelpers.HiWord(Lo))
+        Cmd(9) = wclHelpers.HiByte(wclHelpers.LoWord(Lo))
+        Cmd(10) = wclHelpers.LoByte(wclHelpers.LoWord(Lo))
+        Return Cmd
+    End Function
+
+    Public Function Create(Data As Byte()) As Byte()
         Dim Len As UInt16 = CUShort(3 + Data.Length)
         Dim Cmd As Byte() = New Byte(Len - 1) {}
         Cmd(0) = wclHelpers.HiByte(Len)
@@ -165,7 +198,7 @@ Friend Module CommandBuilder
         Return Cmd
     End Function
 
-    Public Function CreateString(Data As String) As Byte()
+    Public Function Create(Data As String) As Byte()
         Dim Str As Byte() = Text.Encoding.UTF8.GetBytes(Data)
         Dim Len As UInt16 = CUShort(3 + Str.Length)
         Dim Cmd As Byte() = New Byte(Len - 1) {}

@@ -103,42 +103,54 @@ namespace RfCommClientServer
 
     internal static class CommandBuilder
     {
-        public static Byte[] CreateByte(Byte Data, Boolean Signed)
+        public static Byte[] Create(Byte Data)
         {
             Byte[] Cmd = new Byte[4];
             Cmd[0] = 0x00;
             Cmd[1] = 0x04;
-            if (Signed)
-                Cmd[2] = Commands.CMD_SEND_SBYTE;
-            else
-                Cmd[2] = Commands.CMD_SEND_BYTE;
+            Cmd[2] = Commands.CMD_SEND_BYTE;
             Cmd[3] = Data;
             return Cmd;
         }
 
-        public static Byte[] CreateUInt16(UInt16 Data, Boolean Signed)
+        public static Byte[] Create(SByte Data)
+        {
+            Byte[] Cmd = new Byte[4];
+            Cmd[0] = 0x00;
+            Cmd[1] = 0x04;
+            Cmd[2] = Commands.CMD_SEND_SBYTE;
+            Cmd[3] = (Byte)Data;
+            return Cmd;
+        }
+
+        public static Byte[] Create(UInt16 Data)
         {
             Byte[] Cmd = new Byte[5];
             Cmd[0] = 0x00;
             Cmd[1] = 0x05;
-            if (Signed)
-                Cmd[2] = Commands.CMD_SEND_INT16;
-            else
-                Cmd[2] = Commands.CMD_SEND_UINT16;
+            Cmd[2] = Commands.CMD_SEND_UINT16;
             Cmd[3] = wclHelpers.HiByte(Data);
             Cmd[4] = wclHelpers.LoByte(Data);
             return Cmd;
         }
 
-        public static Byte[] CreateUInt32(UInt32 Data, Boolean Signed)
+        public static Byte[] Create(Int16 Data)
+        {
+            Byte[] Cmd = new Byte[5];
+            Cmd[0] = 0x00;
+            Cmd[1] = 0x05;
+            Cmd[2] = Commands.CMD_SEND_INT16;
+            Cmd[3] = wclHelpers.HiByte((UInt16)Data);
+            Cmd[4] = wclHelpers.LoByte((UInt16)Data);
+            return Cmd;
+        }
+
+        public static Byte[] Create(UInt32 Data)
         {
             Byte[] Cmd = new Byte[7];
             Cmd[0] = 0x00;
             Cmd[1] = 0x07;
-            if (Signed)
-                Cmd[2] = Commands.CMD_SEND_INT32;
-            else
-                Cmd[2] = Commands.CMD_SEND_UINT32;
+            Cmd[2] = Commands.CMD_SEND_UINT32;
             Cmd[3] = wclHelpers.HiByte(wclHelpers.HiWord(Data));
             Cmd[4] = wclHelpers.LoByte(wclHelpers.HiWord(Data));
             Cmd[5] = wclHelpers.HiByte(wclHelpers.LoWord(Data));
@@ -146,17 +158,27 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] CreateUInt64(UInt64 Data, Boolean Signed)
+        public static Byte[] Create(Int32 Data)
+        {
+            Byte[] Cmd = new Byte[7];
+            Cmd[0] = 0x00;
+            Cmd[1] = 0x07;
+            Cmd[2] = Commands.CMD_SEND_INT32;
+            Cmd[3] = wclHelpers.HiByte(wclHelpers.HiWord((UInt32)Data));
+            Cmd[4] = wclHelpers.LoByte(wclHelpers.HiWord((UInt32)Data));
+            Cmd[5] = wclHelpers.HiByte(wclHelpers.LoWord((UInt32)Data));
+            Cmd[6] = wclHelpers.LoByte(wclHelpers.LoWord((UInt32)Data));
+            return Cmd;
+        }
+
+        public static Byte[] Create(UInt64 Data)
         {
             UInt32 Hi = (UInt32)(Data >> 32);
             UInt32 Lo = (UInt32)(Data & 0x00000000FFFFFFFF);
             Byte[] Cmd = new Byte[11];
             Cmd[0] = 0x00;
             Cmd[1] = 0x0B;
-            if (Signed)
-                Cmd[2] = Commands.CMD_SEND_INT64;
-            else
-                Cmd[2] = Commands.CMD_SEND_UINT64;
+            Cmd[2] = Commands.CMD_SEND_UINT64;
             Cmd[3] = wclHelpers.HiByte(wclHelpers.HiWord(Hi));
             Cmd[4] = wclHelpers.LoByte(wclHelpers.HiWord(Hi));
             Cmd[5] = wclHelpers.HiByte(wclHelpers.LoWord(Hi));
@@ -168,7 +190,26 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] CreateArray(Byte[] Data)
+        public static Byte[] Create(Int64 Data)
+        {
+            UInt32 Hi = (UInt32)(Data >> 32);
+            UInt32 Lo = (UInt32)(Data & 0x00000000FFFFFFFF);
+            Byte[] Cmd = new Byte[11];
+            Cmd[0] = 0x00;
+            Cmd[1] = 0x0B;
+            Cmd[2] = Commands.CMD_SEND_INT64;
+            Cmd[3] = wclHelpers.HiByte(wclHelpers.HiWord(Hi));
+            Cmd[4] = wclHelpers.LoByte(wclHelpers.HiWord(Hi));
+            Cmd[5] = wclHelpers.HiByte(wclHelpers.LoWord(Hi));
+            Cmd[6] = wclHelpers.LoByte(wclHelpers.LoWord(Hi));
+            Cmd[7] = wclHelpers.HiByte(wclHelpers.HiWord(Lo));
+            Cmd[8] = wclHelpers.LoByte(wclHelpers.HiWord(Lo));
+            Cmd[9] = wclHelpers.HiByte(wclHelpers.LoWord(Lo));
+            Cmd[10] = wclHelpers.LoByte(wclHelpers.LoWord(Lo));
+            return Cmd;
+        }
+
+        public static Byte[] Create(Byte[] Data)
         {
             UInt16 Len = (UInt16)(3 + Data.Length);
             Byte[] Cmd = new Byte[Len];
@@ -179,7 +220,7 @@ namespace RfCommClientServer
             return Cmd;
         }
 
-        public static Byte[] CreateString(String Data)
+        public static Byte[] Create(String Data)
         {
             Byte[] Str = Encoding.UTF8.GetBytes(Data);
             UInt16 Len = (UInt16)(3 + Str.Length);

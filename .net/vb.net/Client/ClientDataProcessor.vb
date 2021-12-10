@@ -107,49 +107,44 @@
     End Sub
 
 #Region "Write data"
-#Region "Unsigned"
     Public Function WriteByte(Data As Byte) As Int32
-        Return Write(CommandBuilder.CreateByte(Data, False))
+        Return Write(CommandBuilder.Create(Data))
+    End Function
+
+    Public Function WriteSByte(Data As SByte) As Int32
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteUInt16(Data As UInt16) As Int32
-        Return Write(CommandBuilder.CreateUInt16(Data, False))
-    End Function
-
-    Public Function WriteUInt32(Data As UInt32) As Int32
-        Return Write(CommandBuilder.CreateUInt32(Data, False))
-    End Function
-
-    Public Function WriteUInt64(Data As UInt64) As Int32
-        Return Write(CommandBuilder.CreateUInt64(Data, False))
-    End Function
-#End Region
-
-#Region "Signed"
-    Public Function WriteSByte(Data As SByte) As Int32
-        Return Write(CommandBuilder.CreateByte(CByte(Data), True))
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteInt16(Data As Int16) As Int32
-        Return Write(CommandBuilder.CreateUInt16(CUShort(Data), True))
+        Return Write(CommandBuilder.Create(Data))
+    End Function
+
+    Public Function WriteUInt32(Data As UInt32) As Int32
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteInt32(Data As Int32) As Int32
-        Return Write(CommandBuilder.CreateUInt32(CUInt(Data), True))
+        Return Write(CommandBuilder.Create(Data))
+    End Function
+
+    Public Function WriteUInt64(Data As UInt64) As Int32
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteInt64(Data As Int64) As Int32
-        Return Write(CommandBuilder.CreateUInt64(CULng(Data), True))
+        Return Write(CommandBuilder.Create(Data))
     End Function
-#End Region
 
-#Region "Array"
     Public Function WriteArray(Data As Byte()) As Int32
         If Data Is Nothing Or Data.Length = 0 Or CUInt(Data.Length) > UInt16.MaxValue - 3 Then
             Return wclErrors.WCL_E_INVALID_ARGUMENT
         End If
 
-        Return Write(CommandBuilder.CreateArray(Data))
+        Return Write(CommandBuilder.Create(Data))
     End Function
 
     Public Function WriteString(Data As String) As Int32
@@ -157,49 +152,43 @@
             Return wclErrors.WCL_E_INVALID_ARGUMENT
         End If
 
-        Return Write(CommandBuilder.CreateString(Data))
+        Return Write(CommandBuilder.Create(Data))
     End Function
-#End Region
 #End Region
 
 #Region "Get data"
-#Region "Sigend"
-    Public Function GetSByte() As Int32
-        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_SBYTE))
-    End Function
-
-    Public Function GetInt16() As Int32
-        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT16))
-    End Function
-
-    Public Function GetInt32() As Int32
-        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT32))
-    End Function
-
-    Public Function GetInt64() As Int32
-        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT64))
-    End Function
-#End Region
-
-#Region "Unsigend"
     Public Function GetByte() As Int32
         Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_BYTE))
+    End Function
+
+    Public Function GetSByte() As Int32
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_SBYTE))
     End Function
 
     Public Function GetUInt16() As Int32
         Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_UINT16))
     End Function
 
+    Public Function GetInt16() As Int32
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT16))
+    End Function
+
     Public Function GetUInt32() As Int32
         Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_UINT32))
+    End Function
+
+    Public Function GetInt32() As Int32
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT32))
     End Function
 
     Public Function GetUInt64() As Int32
         Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_UINT64))
     End Function
-#End Region
 
-#Region "Array"
+    Public Function GetInt64() As Int32
+        Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT64))
+    End Function
+
     Public Function GetArray() As Int32
         Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_ARRAY))
     End Function
@@ -207,7 +196,6 @@
     Public Function GetString() As Int32
         Return Write(CommandBuilder.CreateGet(Commands.CMD_GET_STRING))
     End Function
-#End Region
 #End Region
 
 #Region "Events."

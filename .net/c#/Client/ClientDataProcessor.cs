@@ -117,57 +117,52 @@ namespace RfCommClient
         }
 
         #region Write data
-        #region Unsigned
         public Int32 WriteByte(Byte Data)
         {
-            return Write(CommandBuilder.CreateByte(Data, false));
+            return Write(CommandBuilder.Create(Data));
+        }
+
+        public Int32 WriteSByte(SByte Data)
+        {
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteUInt16(UInt16 Data)
         {
-            return Write(CommandBuilder.CreateUInt16(Data, false));
-        }
-
-        public Int32 WriteUInt32(UInt32 Data)
-        {
-            return Write(CommandBuilder.CreateUInt32(Data, false));
-        }
-
-        public Int32 WriteUInt64(UInt64 Data)
-        {
-            return Write(CommandBuilder.CreateUInt64(Data, false));
-        }
-        #endregion
-
-        #region Signed
-        public Int32 WriteSByte(SByte Data)
-        {
-            return Write(CommandBuilder.CreateByte((Byte)Data, true));
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteInt16(Int16 Data)
         {
-            return Write(CommandBuilder.CreateUInt16((UInt16)Data, true));
+            return Write(CommandBuilder.Create(Data));
+        }
+
+        public Int32 WriteUInt32(UInt32 Data)
+        {
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteInt32(Int32 Data)
         {
-            return Write(CommandBuilder.CreateUInt32((UInt32)Data, true));
+            return Write(CommandBuilder.Create(Data));
+        }
+
+        public Int32 WriteUInt64(UInt64 Data)
+        {
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteInt64(Int64 Data)
         {
-            return Write(CommandBuilder.CreateUInt64((UInt64)Data, true));
+            return Write(CommandBuilder.Create(Data));
         }
-        #endregion
-
-        #region Array
+        
         public Int32 WriteArray(Byte[] Data)
         {
             if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
                 return wclErrors.WCL_E_INVALID_ARGUMENT;
 
-            return Write(CommandBuilder.CreateArray(Data));
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteString(String Data)
@@ -175,38 +170,19 @@ namespace RfCommClient
             if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
                 return wclErrors.WCL_E_INVALID_ARGUMENT;
 
-            return Write(CommandBuilder.CreateString(Data));
+            return Write(CommandBuilder.Create(Data));
         }
-        #endregion
         #endregion
 
         #region Get data
-        #region Sigend
-        public Int32 GetSByte()
-        {
-            return Write(CommandBuilder.CreateGet(Commands.CMD_GET_SBYTE));
-        }
-
-        public Int32 GetInt16()
-        {
-            return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT16));
-        }
-
-        public Int32 GetInt32()
-        {
-            return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT32));
-        }
-
-        public Int32 GetInt64()
-        {
-            return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT64));
-        }
-        #endregion
-
-        #region Unsigend
         public Int32 GetByte()
         {
             return Write(CommandBuilder.CreateGet(Commands.CMD_GET_BYTE));
+        }
+
+        public Int32 GetSByte()
+        {
+            return Write(CommandBuilder.CreateGet(Commands.CMD_GET_SBYTE));
         }
 
         public Int32 GetUInt16()
@@ -214,18 +190,31 @@ namespace RfCommClient
             return Write(CommandBuilder.CreateGet(Commands.CMD_GET_UINT16));
         }
 
+        public Int32 GetInt16()
+        {
+            return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT16));
+        }
+
         public Int32 GetUInt32()
         {
             return Write(CommandBuilder.CreateGet(Commands.CMD_GET_UINT32));
+        }
+
+        public Int32 GetInt32()
+        {
+            return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT32));
         }
 
         public Int32 GetUInt64()
         {
             return Write(CommandBuilder.CreateGet(Commands.CMD_GET_UINT64));
         }
-        #endregion
 
-        #region Array
+        public Int32 GetInt64()
+        {
+            return Write(CommandBuilder.CreateGet(Commands.CMD_GET_INT64));
+        }
+        
         public Int32 GetArray()
         {
             return Write(CommandBuilder.CreateGet(Commands.CMD_GET_ARRAY));
@@ -235,7 +224,6 @@ namespace RfCommClient
         {
             return Write(CommandBuilder.CreateGet(Commands.CMD_GET_STRING));
         }
-        #endregion
         #endregion
 
         #region Events.

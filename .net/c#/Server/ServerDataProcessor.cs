@@ -189,57 +189,52 @@ namespace RfCommServer
         }
 
         #region Write data
-        #region Unsigned
         public Int32 WriteByte(Byte Data)
         {
-            return Write(CommandBuilder.CreateByte(Data, false));
+            return Write(CommandBuilder.Create(Data));
+        }
+
+        public Int32 WriteSByte(SByte Data)
+        {
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteUInt16(UInt16 Data)
         {
-            return Write(CommandBuilder.CreateUInt16(Data, false));
-        }
-
-        public Int32 WriteUInt32(UInt32 Data)
-        {
-            return Write(CommandBuilder.CreateUInt32(Data, false));
-        }
-
-        public Int32 WriteUInt64(UInt64 Data)
-        {
-            return Write(CommandBuilder.CreateUInt64(Data, false));
-        }
-        #endregion
-
-        #region Signed
-        public Int32 WriteSByte(SByte Data)
-        {
-            return Write(CommandBuilder.CreateByte((Byte)Data, true));
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteInt16(Int16 Data)
         {
-            return Write(CommandBuilder.CreateUInt16((UInt16)Data, true));
+            return Write(CommandBuilder.Create(Data));
+        }
+
+        public Int32 WriteUInt32(UInt32 Data)
+        {
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteInt32(Int32 Data)
         {
-            return Write(CommandBuilder.CreateUInt32((UInt32)Data, true));
+            return Write(CommandBuilder.Create(Data));
+        }
+
+        public Int32 WriteUInt64(UInt64 Data)
+        {
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteInt64(Int64 Data)
         {
-            return Write(CommandBuilder.CreateUInt64((UInt64)Data, true));
+            return Write(CommandBuilder.Create(Data));
         }
-        #endregion
-
-        #region Array
+        
         public Int32 WriteArray(Byte[] Data)
         {
             if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
                 return wclErrors.WCL_E_INVALID_ARGUMENT;
 
-            return Write(CommandBuilder.CreateArray(Data));
+            return Write(CommandBuilder.Create(Data));
         }
 
         public Int32 WriteString(String Data)
@@ -247,16 +242,13 @@ namespace RfCommServer
             if (Data == null || Data.Length == 0 || (UInt32)Data.Length > UInt16.MaxValue - 3)
                 return wclErrors.WCL_E_INVALID_ARGUMENT;
 
-            return Write(CommandBuilder.CreateString(Data));
+            return Write(CommandBuilder.Create(Data));
         }
-        #endregion
-
-        #region Send error
+        
         public Int32 WriteError(Int32 Error)
         {
             return Write(CommandBuilder.CreateError(Error));
         }
-        #endregion
         #endregion
 
         #region Events.
