@@ -316,37 +316,37 @@ begin
   if (Length(Data) = 0) or (Length(Data) > High(UInt16) - 3) then
     Result := WCL_E_INVALID_ARGUMENT
   else
-    Result := Write(TCommandBuilder.Create(Data));
+    Result := Write(Common.Create(Data));
 end;
 
 function TServerDataProcessor.WriteByte(const Data: Byte): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TServerDataProcessor.WriteError(const Error: Integer): Integer;
 begin
-  Result := Write(TCommandBuilder.CreateError(Error));
+  Result := Write(Common.CreateError(Error));
 end;
 
 function TServerDataProcessor.WriteInt16(const Data: Int16): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TServerDataProcessor.WriteInt32(const Data: Int32): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TServerDataProcessor.WriteInt64(const Data: Int64): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TServerDataProcessor.WriteSByte(const Data: Int8): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TServerDataProcessor.WriteString(const Data: string): Integer;
@@ -354,22 +354,22 @@ begin
   if (Length(Data) = 0) or (Length(Data) > High(UInt16) - 3) then
     Result := WCL_E_INVALID_ARGUMENT
   else
-    Result := Write(TCommandBuilder.Create(Data));
+    Result := Write(Common.Create(Data));
 end;
 
 function TServerDataProcessor.WriteUInt16(const Data: UInt16): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TServerDataProcessor.WriteUInt32(const Data: UInt32): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TServerDataProcessor.WriteUInt64(const Data: UInt64): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 end.

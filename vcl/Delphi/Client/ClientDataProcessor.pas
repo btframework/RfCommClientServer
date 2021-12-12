@@ -162,52 +162,52 @@ end;
 
 function TClientDataProcessor.GetArray: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_ARRAY));
+  Result := Write(CreateGet(CMD_GET_ARRAY));
 end;
 
 function TClientDataProcessor.GetByte: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_BYTE));
+  Result := Write(CreateGet(CMD_GET_BYTE));
 end;
 
 function TClientDataProcessor.GetInt16: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_INT16));
+  Result := Write(CreateGet(CMD_GET_INT16));
 end;
 
 function TClientDataProcessor.GetInt32: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_INT32));
+  Result := Write(CreateGet(CMD_GET_INT32));
 end;
 
 function TClientDataProcessor.GetInt64: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_INT64));
+  Result := Write(CreateGet(CMD_GET_INT64));
 end;
 
 function TClientDataProcessor.GetSByte: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_SBYTE));
+  Result := Write(CreateGet(CMD_GET_SBYTE));
 end;
 
 function TClientDataProcessor.GetString: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_STRING));
+  Result := Write(CreateGet(CMD_GET_STRING));
 end;
 
 function TClientDataProcessor.GetUInt16: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_UINT16));
+  Result := Write(CreateGet(CMD_GET_UINT16));
 end;
 
 function TClientDataProcessor.GetUInt32: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_UINT32));
+  Result := Write(CreateGet(CMD_GET_UINT32));
 end;
 
 function TClientDataProcessor.GetUInt64: Integer;
 begin
-  Result := Write(TCommandBuilder.CreateGet(TCommands.CMD_GET_UINT64));
+  Result := Write(CreateGet(CMD_GET_UINT64));
 end;
 
 procedure TClientDataProcessor.Int16Received(Sender: TObject;
@@ -287,32 +287,32 @@ begin
   if (Length(Data) = 0) or (Length(Data) > High(Word) - 3) then
     Result := WCL_E_INVALID_ARGUMENT
   else
-    Result := Write(TCommandBuilder.Create(Data));
+    Result := Write(Common.Create(Data));
 end;
 
 function TClientDataProcessor.WriteByte(const Data: Byte): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TClientDataProcessor.WriteInt16(const Data: Int16): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TClientDataProcessor.WriteInt32(const Data: Int32): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TClientDataProcessor.WriteInt64(const Data: Int64): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TClientDataProcessor.WriteSByte(const Data: Int8): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TClientDataProcessor.WriteString(const Data: string): Integer;
@@ -320,22 +320,22 @@ begin
   if (Length(Data) = 0) or (Length(Data) > High(Word) - 3) then
     Result := WCL_E_INVALID_ARGUMENT
   else
-    Result := Write(TCommandBuilder.Create(Data));
+    Result := Write(Common.Create(Data));
 end;
 
 function TClientDataProcessor.WriteUInt16(const Data: UInt16): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TClientDataProcessor.WriteUInt32(const Data: UInt32): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 function TClientDataProcessor.WriteUInt64(const Data: UInt64): Integer;
 begin
-  Result := Write(TCommandBuilder.Create(Data));
+  Result := Write(Common.Create(Data));
 end;
 
 end.

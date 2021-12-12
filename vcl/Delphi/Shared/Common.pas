@@ -21,76 +21,71 @@ type
 
   TErrorEvent = procedure(Sender: TObject; const Error: Integer) of object;
 
-  TCommands = class sealed
-  public const
-    CMD_FLAG = $0F;
+const
+  CMD_FLAG = $0F;
 
-    CMD_FLAG_SEND = $00;
-    CMD_FLAG_GET = $40;
-    CMD_FLAG_ERROR = $80;
+  CMD_FLAG_SEND = $00;
+  CMD_FLAG_GET = $40;
+  CMD_FLAG_ERROR = $80;
 
-    CMD_BYTE = $01;
-    CMD_UINT16 = $02;
-    CMD_UINT32 = $03;
-    CMD_UINT64 = $04;
-    CMD_SBYTE = $05;
-    CMD_INT16 = $06;
-    CMD_INT32 = $07;
-    CMD_INT64 = $08;
-    CMD_ARRAY = $09;
-    CMD_STRING = $0A;
+  CMD_BYTE = $01;
+  CMD_UINT16 = $02;
+  CMD_UINT32 = $03;
+  CMD_UINT64 = $04;
+  CMD_SBYTE = $05;
+  CMD_INT16 = $06;
+  CMD_INT32 = $07;
+  CMD_INT64 = $08;
+  CMD_ARRAY = $09;
+  CMD_STRING = $0A;
 
-    CMD_ERROR = $0F;
+  CMD_ERROR = $0F;
 
-    CMD_SEND_BYTE = CMD_FLAG_SEND or CMD_BYTE;
-    CMD_SEND_UINT16 = CMD_FLAG_SEND or CMD_UINT16;
-    CMD_SEND_UINT32 = CMD_FLAG_SEND or CMD_UINT32;
-    CMD_SEND_UINT64 = CMD_FLAG_SEND or CMD_UINT64;
-    CMD_SEND_SBYTE = CMD_FLAG_SEND or CMD_SBYTE;
-    CMD_SEND_INT16 = CMD_FLAG_SEND or CMD_INT16;
-    CMD_SEND_INT32 = CMD_FLAG_SEND or CMD_INT32;
-    CMD_SEND_INT64 = CMD_FLAG_SEND or CMD_INT64;
-    CMD_SEND_ARRAY = CMD_FLAG_SEND or CMD_ARRAY;
-    CMD_SEND_STRING = CMD_FLAG_SEND or CMD_STRING;
+  CMD_SEND_BYTE = CMD_FLAG_SEND or CMD_BYTE;
+  CMD_SEND_UINT16 = CMD_FLAG_SEND or CMD_UINT16;
+  CMD_SEND_UINT32 = CMD_FLAG_SEND or CMD_UINT32;
+  CMD_SEND_UINT64 = CMD_FLAG_SEND or CMD_UINT64;
+  CMD_SEND_SBYTE = CMD_FLAG_SEND or CMD_SBYTE;
+  CMD_SEND_INT16 = CMD_FLAG_SEND or CMD_INT16;
+  CMD_SEND_INT32 = CMD_FLAG_SEND or CMD_INT32;
+  CMD_SEND_INT64 = CMD_FLAG_SEND or CMD_INT64;
+  CMD_SEND_ARRAY = CMD_FLAG_SEND or CMD_ARRAY;
+  CMD_SEND_STRING = CMD_FLAG_SEND or CMD_STRING;
 
-    CMD_GET_BYTE = CMD_FLAG_GET or CMD_BYTE;
-    CMD_GET_UINT16 = CMD_FLAG_GET or CMD_UINT16;
-    CMD_GET_UINT32 = CMD_FLAG_GET or CMD_UINT32;
-    CMD_GET_UINT64 = CMD_FLAG_GET or CMD_UINT64;
-    CMD_GET_SBYTE = CMD_FLAG_GET or CMD_SBYTE;
-    CMD_GET_INT16 = CMD_FLAG_GET or CMD_INT16;
-    CMD_GET_INT32 = CMD_FLAG_GET or CMD_INT32;
-    CMD_GET_INT64 = CMD_FLAG_GET or CMD_INT64;
-    CMD_GET_ARRAY = CMD_FLAG_GET or CMD_ARRAY;
-    CMD_GET_STRING = CMD_FLAG_GET or CMD_STRING;
+  CMD_GET_BYTE = CMD_FLAG_GET or CMD_BYTE;
+  CMD_GET_UINT16 = CMD_FLAG_GET or CMD_UINT16;
+  CMD_GET_UINT32 = CMD_FLAG_GET or CMD_UINT32;
+  CMD_GET_UINT64 = CMD_FLAG_GET or CMD_UINT64;
+  CMD_GET_SBYTE = CMD_FLAG_GET or CMD_SBYTE;
+  CMD_GET_INT16 = CMD_FLAG_GET or CMD_INT16;
+  CMD_GET_INT32 = CMD_FLAG_GET or CMD_INT32;
+  CMD_GET_INT64 = CMD_FLAG_GET or CMD_INT64;
+  CMD_GET_ARRAY = CMD_FLAG_GET or CMD_ARRAY;
+  CMD_GET_STRING = CMD_FLAG_GET or CMD_STRING;
 
-    CMD_ERROR_CODE = CMD_FLAG_ERROR or CMD_ERROR;
+  CMD_ERROR_CODE = CMD_FLAG_ERROR or CMD_ERROR;
 
-    ServiceUuid: TGUID = '{CA80C97C-06B3-4E65-9CEE-65BB0B11BC92}';
+  ServiceUuid: TGUID = '{CA80C97C-06B3-4E65-9CEE-65BB0B11BC92}';
 
-  public
-    class function IsCmdSend(const Cmd: Byte): Boolean;
-    class function IsCmdGet(const Cmd: Byte): Boolean;
-    class function IsCmdError(const Cmd: Byte): Boolean;
-  end;
+function IsCmdSend(const Cmd: Byte): Boolean;
+function IsCmdGet(const Cmd: Byte): Boolean;
+function IsCmdError(const Cmd: Byte): Boolean;
 
-  TCommandBuilder = class sealed
-  public
-    class function Create(const Data: Byte): TBytesArray; overload;
-    class function Create(const Data: Int8): TBytesArray; overload;
-    class function Create(const Data: UInt16): TBytesArray; overload;
-    class function Create(const Data: Int16): TBytesArray; overload;
-    class function Create(const Data: UInt32): TBytesArray; overload;
-    class function Create(const Data: Int32): TBytesArray; overload;
-    class function Create(const Data: UInt64): TBytesArray; overload;
-    class function Create(const Data: Int64): TBytesArray; overload;
-    class function Create(const Data: TBytesArray): TBytesArray; overload;
-    class function Create(const Data: string): TBytesArray; overload;
+function Create(const Data: Byte): TBytesArray; overload;
+function Create(const Data: Int8): TBytesArray; overload;
+function Create(const Data: UInt16): TBytesArray; overload;
+function Create(const Data: Int16): TBytesArray; overload;
+function Create(const Data: UInt32): TBytesArray; overload;
+function Create(const Data: Int32): TBytesArray; overload;
+function Create(const Data: UInt64): TBytesArray; overload;
+function Create(const Data: Int64): TBytesArray; overload;
+function Create(const Data: TBytesArray): TBytesArray; overload;
+function Create(const Data: string): TBytesArray; overload;
 
-    class function CreateError(const Error: Integer): TBytesArray;
-    class function CreateGet(const Cmd: Byte): TBytesArray;
-  end;
+function CreateError(const Error: Integer): TBytesArray;
+function CreateGet(const Cmd: Byte): TBytesArray;
 
+type
   TCommandDecoder = class sealed
   private
     FBuffer: TBytesArray;
@@ -195,89 +190,88 @@ implementation
 uses
   Windows;
 
-{ TCommands }
+{ Commands }
 
-class function TCommands.IsCmdSend(const Cmd: Byte): Boolean;
+function IsCmdSend(const Cmd: Byte): Boolean;
 begin
-  Result := ((Cmd and TCommands.CMD_FLAG_GET) = 0) and
-    ((Cmd and TCommands.CMD_FLAG_ERROR) = 0);
+  Result := ((Cmd and CMD_FLAG_GET) = 0) and ((Cmd and CMD_FLAG_ERROR) = 0);
 end;
 
-class function TCommands.IsCmdGet(const Cmd: Byte): Boolean;
+function IsCmdGet(const Cmd: Byte): Boolean;
 begin
-  Result := (Cmd and TCommands.CMD_FLAG_GET) <> 0;
+  Result := (Cmd and CMD_FLAG_GET) <> 0;
 end;
 
-class function TCommands.IsCmdError(const Cmd: Byte): Boolean;
+function IsCmdError(const Cmd: Byte): Boolean;
 begin
-  Result := (Cmd and TCommands.CMD_FLAG_ERROR) <> 0;
+  Result := (Cmd and CMD_FLAG_ERROR) <> 0;
 end;
 
-{ TCommandBuilder }
+{ Command Builder }
 
-class function TCommandBuilder.Create(const Data: Byte): TBytesArray;
-begin
-  SetLength(Result, 4);
-  Result[0] := $00;
-  Result[1] := $04;
-  Result[2] := TCommands.CMD_SEND_BYTE;
-  Result[3] := Data;
-end;
-
-class function TCommandBuilder.Create(const Data: Int8): TBytesArray;
+function Create(const Data: Byte): TBytesArray;
 begin
   SetLength(Result, 4);
   Result[0] := $00;
   Result[1] := $04;
-  Result[2] := TCommands.CMD_SEND_SBYTE;
+  Result[2] := CMD_SEND_BYTE;
   Result[3] := Data;
 end;
 
-class function TCommandBuilder.Create(const Data: UInt16): TBytesArray;
+function Create(const Data: Int8): TBytesArray;
+begin
+  SetLength(Result, 4);
+  Result[0] := $00;
+  Result[1] := $04;
+  Result[2] := CMD_SEND_SBYTE;
+  Result[3] := Data;
+end;
+
+function Create(const Data: UInt16): TBytesArray;
 begin
   SetLength(Result, 5);
   Result[0] := $00;
   Result[1] := $05;
-  Result[2] := TCommands.CMD_SEND_UINT16;
+  Result[2] := CMD_SEND_UINT16;
   Result[3] := HIBYTE(Data);
   Result[4] := LOBYTE(Data);
 end;
 
-class function TCommandBuilder.Create(const Data: Int16): TBytesArray;
+function Create(const Data: Int16): TBytesArray;
 begin
   SetLength(Result, 5);
   Result[0] := $00;
   Result[1] := $05;
-  Result[2] := TCommands.CMD_SEND_INT16;
+  Result[2] := CMD_SEND_INT16;
   Result[3] := HIBYTE(Data);
   Result[4] := LOBYTE(Data);
 end;
 
-class function TCommandBuilder.Create(const Data: UInt32): TBytesArray;
+function Create(const Data: UInt32): TBytesArray;
 begin
   SetLength(Result, 7);
   Result[0] := $00;
   Result[1] := $07;
-  Result[2] := TCommands.CMD_SEND_UINT32;
+  Result[2] := CMD_SEND_UINT32;
   Result[3] := HIBYTE(HIWORD(Data));
   Result[4] := LOBYTE(HIWORD(Data));
   Result[5] := HIBYTE(LOWORD(Data));
   Result[6] := LOBYTE(LOWORD(Data));
 end;
 
-class function TCommandBuilder.Create(const Data: Int32): TBytesArray;
+function Create(const Data: Int32): TBytesArray;
 begin
   SetLength(Result, 7);
   Result[0] := $00;
   Result[1] := $07;
-  Result[2] := TCommands.CMD_SEND_INT32;
+  Result[2] := CMD_SEND_INT32;
   Result[3] := HIBYTE(HIWORD(Data));
   Result[4] := LOBYTE(HIWORD(Data));
   Result[5] := HIBYTE(LOWORD(Data));
   Result[6] := LOBYTE(LOWORD(Data));
 end;
 
-class function TCommandBuilder.Create(const Data: UInt64): TBytesArray;
+function Create(const Data: UInt64): TBytesArray;
 var
   Hi: UInt32;
   Lo: UInt32;
@@ -287,7 +281,7 @@ begin
   SetLength(Result, 11);
   Result[0] := $00;
   Result[1] := $0B;
-  Result[2] := TCommands.CMD_SEND_UINT64;
+  Result[2] := CMD_SEND_UINT64;
   Result[3] := HIBYTE(HIWORD(Hi));
   Result[4] := LOBYTE(HIWORD(Hi));
   Result[5] := HIBYTE(LOWORD(Hi));
@@ -298,7 +292,7 @@ begin
   Result[10] := LOBYTE(LOWORD(Lo));
 end;
 
-class function TCommandBuilder.Create(const Data: Int64): TBytesArray;
+function Create(const Data: Int64): TBytesArray;
 var
   Hi: UInt32;
   Lo: UInt32;
@@ -308,7 +302,7 @@ begin
   SetLength(Result, 11);
   Result[0] := $00;
   Result[1] := $0B;
-  Result[2] := TCommands.CMD_SEND_INT64;
+  Result[2] := CMD_SEND_INT64;
   Result[3] := HIBYTE(HIWORD(Hi));
   Result[4] := LOBYTE(HIWORD(Hi));
   Result[5] := HIBYTE(LOWORD(Hi));
@@ -319,7 +313,7 @@ begin
   Result[10] := LOBYTE(LOWORD(Lo));
 end;
 
-class function TCommandBuilder.Create(const Data: TBytesArray): TBytesArray;
+function Create(const Data: TBytesArray): TBytesArray;
 var
   Len: UInt16;
 begin
@@ -327,11 +321,11 @@ begin
   SetLength(Result, Len);
   Result[0] := HIBYTE(Len);
   Result[1] := LOBYTE(Len);
-  Result[2] := TCommands.CMD_SEND_ARRAY;
+  Result[2] := CMD_SEND_ARRAY;
   CopyMemory(@Result[3], Pointer(Data), Length(Data));
 end;
 
-class function TCommandBuilder.Create(const Data: string): TBytesArray;
+function Create(const Data: string): TBytesArray;
 var
   Str: UTF8String;
   Len: UInt16;
@@ -341,23 +335,23 @@ begin
   SetLength(Result, Len);
   Result[0] := HIBYTE(Len);
   Result[1] := LOBYTE(Len);
-  Result[2] := TCommands.CMD_SEND_STRING;
+  Result[2] := CMD_SEND_STRING;
   CopyMemory(@Result[3], Pointer(Str), Length(Str));
 end;
 
-class function TCommandBuilder.CreateError(const Error: Integer): TBytesArray;
+function CreateError(const Error: Integer): TBytesArray;
 begin
   SetLength(Result, 7);
   Result[0] := $00;
   Result[1] := $07;
-  Result[2] := TCommands.CMD_ERROR_CODE;
+  Result[2] := CMD_ERROR_CODE;
   Result[3] := HIBYTE(HIWORD(Error));
   Result[4] := LOBYTE(HIWORD(Error));
   Result[5] := HIBYTE(LOWORD(Error));
   Result[6] := LOBYTE(LOWORD(Error));
 end;
 
-class function TCommandBuilder.CreateGet(const Cmd: Byte): TBytesArray;
+function CreateGet(const Cmd: Byte): TBytesArray;
 begin
   SetLength(Result, 3);
   Result[0] := $00;
@@ -429,13 +423,13 @@ var
 begin
   // It is guaranteed that the Data length at least 2 bytes.
   Cmd := Data[0];
-  if TCommands.IsCmdSend(Cmd) then
+  if IsCmdSend(Cmd) then
     DecodeSendCommand(Data)
   else begin
-    if TCommands.IsCmdGet(Cmd) then
+    if IsCmdGet(Cmd) then
       DecodeGetCommand(Data)
     else begin
-      if TCommands.IsCmdError(Cmd) then
+      if IsCmdError(Cmd) then
         DecodeErrorCommand(Data);
     end;
   end;
@@ -446,7 +440,7 @@ var
   Error: Integer;
 begin
   if Length(Data) = 5 then begin
-    if Data[0] = TCommands.CMD_ERROR_CODE then begin
+    if Data[0] = CMD_ERROR_CODE then begin
       Error := (Data[1] shl 24) or (Data[2] shl 16) or
         (Data[3] shl 8) or Data[4];
       DoError(Error);
@@ -457,17 +451,17 @@ end;
 procedure TCommandDecoder.DecodeGetCommand(const Data: TBytesArray);
 begin
   if Length(Data) = 1 then begin
-    case Data[0] and TCommands.CMD_FLAG of
-      TCommands.CMD_BYTE: DoGetByte;
-      TCommands.CMD_UINT16: DoGetUInt16;
-      TCommands.CMD_UINT32: DoGetUInt32;
-      TCommands.CMD_UINT64: DoGetUInt64;
-      TCommands.CMD_SBYTE: DoGetSByte;
-      TCommands.CMD_INT16: DoGetInt16;
-      TCommands.CMD_INT32: DoGetInt32;
-      TCommands.CMD_INT64: DoGetInt64;
-      TCommands.CMD_ARRAY: DoGetArray;
-      TCommands.CMD_STRING: DoGetString;
+    case Data[0] and CMD_FLAG of
+      CMD_BYTE: DoGetByte;
+      CMD_UINT16: DoGetUInt16;
+      CMD_UINT32: DoGetUInt32;
+      CMD_UINT64: DoGetUInt64;
+      CMD_SBYTE: DoGetSByte;
+      CMD_INT16: DoGetInt16;
+      CMD_INT32: DoGetInt32;
+      CMD_INT64: DoGetInt64;
+      CMD_ARRAY: DoGetArray;
+      CMD_STRING: DoGetString;
     end;
   end;
 end;
@@ -478,22 +472,22 @@ var
   Utf8: RawByteString;
   Str: string;
 begin
-  case Data[0] and TCommands.CMD_FLAG of
-    TCommands.CMD_BYTE:
+  case Data[0] and CMD_FLAG of
+    CMD_BYTE:
       if Length(Data) = 2 then
         DoByteReceived(Data[1]);
 
-    TCommands.CMD_UINT16:
+    CMD_UINT16:
       if Length(Data) = 3 then
         DoUInt16Received((Data[1] shl 8) or Data[2]);
 
-    TCommands.CMD_UINT32:
+    CMD_UINT32:
       if Length(Data) = 5 then begin
         DoUInt32Received((Data[1] shl 24) or (Data[2] shl 16) or
           (Data[3] shl 8) or Data[4]);
       end;
 
-    TCommands.CMD_UINT64:
+    CMD_UINT64:
       if Length(Data) = 9 then begin
         DoUInt64Received((UInt64(Data[1]) shl 56) or (UInt64(Data[2]) shl 48) or
           (UInt64(Data[3]) shl 40) or (UInt64(Data[4]) shl 32) or
@@ -501,21 +495,21 @@ begin
           (UInt64(Data[7]) shl 8) or UInt64(Data[8]));
       end;
 
-    TCommands.CMD_SBYTE:
+    CMD_SBYTE:
       if Length(Data) = 2 then
         DoSByteReceived(Data[1]);
 
-    TCommands.CMD_INT16:
+    CMD_INT16:
       if Length(Data) = 3 then
         DoInt16Received((Data[1] shl 8) or Data[2]);
 
-    TCommands.CMD_INT32:
+    CMD_INT32:
       if Length(Data) = 5 then begin
         DoInt32Received((Data[1] shl 24) or (Data[2] shl 16) or
           (Data[3] shl 8) or Data[4]);
       end;
 
-    TCommands.CMD_INT64:
+    CMD_INT64:
       if Length(Data) = 9 then begin
         DoInt64Received((Int64(Data[1]) shl 56) or (Int64(Data[2]) shl 48) or
           (Int64(Data[3]) shl 40) or (Int64(Data[4]) shl 32) or
@@ -523,14 +517,14 @@ begin
           (Int64(Data[7]) shl 8) or Int64(Data[8]));
       end;
 
-    TCommands.CMD_ARRAY:
+    CMD_ARRAY:
       if Length(Data) > 1 then begin
         SetLength(Arr, Length(Data) - 1);
         CopyMemory(Pointer(Arr), @Data[1], Length(Data) - 1);
         DoArrayReceived(Arr);
       end;
 
-    TCommands.CMD_STRING:
+    CMD_STRING:
       if Length(Data) > 1 then begin
         SetLength(Utf8, Length(Data) - 1);
         CopyMemory(@Utf8[1], @Data[1], Length(Data) - 1);

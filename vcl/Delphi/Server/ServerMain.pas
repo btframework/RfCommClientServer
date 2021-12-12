@@ -133,7 +133,7 @@ procedure TfmServerMain.FormCreate(Sender: TObject);
 var
   Res: Integer;
 begin
-  wclRfCommServer.Service := TCommands.ServiceUuid;
+  wclRfCommServer.Service := ServiceUuid;
 
   Res := wclBluetoothManager.Open;
   if Res <> WCL_E_SUCCESS then

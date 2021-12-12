@@ -461,7 +461,7 @@ var
   Res: Integer;
 begin
   // Use custom service's UUID.
-  wclRfCommClient.Service := TCommands.ServiceUuid;
+  wclRfCommClient.Service := ServiceUuid;
 
   Res := wclBluetoothManager.Open;
   if Res <> WCL_E_SUCCESS then
