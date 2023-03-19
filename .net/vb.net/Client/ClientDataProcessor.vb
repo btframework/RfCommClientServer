@@ -71,7 +71,7 @@
     End Sub
 #End Region
 
-    Protected Overrides Sub ProcessData(Data As Byte())
+    Public Overrides Sub ProcessData(Data As Byte())
         FDecoder.ProcessData(Data)
     End Sub
 

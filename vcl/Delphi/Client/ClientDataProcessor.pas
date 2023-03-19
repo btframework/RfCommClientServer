@@ -37,13 +37,12 @@ type
 
     function Write(const Data: TBytesArray): Integer;
 
-  protected
-    procedure ProcessData(const Data: Pointer; const Size: Cardinal); override;
-
   public
     constructor Create(const Connection: TwclClientDataConnection); override;
     destructor Destroy; override;
-
+    
+    procedure ProcessData(const Data: Pointer; const Size: Cardinal); override;
+    
     function WriteByte(const Data: Byte): Integer;
     function WriteSByte(const Data: Int8): Integer;
     function WriteUInt16(const Data: UInt16): Integer;

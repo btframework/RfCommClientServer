@@ -133,7 +133,7 @@ namespace RfCommServer
         }
         #endregion
 
-        protected override void ProcessData(Byte[] Data)
+        public override void ProcessData(Byte[] Data)
         {
             FDecoder.ProcessData(Data);
         }
